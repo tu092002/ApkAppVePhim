@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#0E0000" /> <!-- Màu nền của viền -->
+    <stroke
+        android:width="5dp"
+        android:color="#E2531D1D" /> <!-- Màu và độ dày của viền -->
+</shape>

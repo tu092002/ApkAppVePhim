@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".Admin.AdminPhim">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:text="QUẢN LÍ PHIM" />
+
+
+        <EditText
+            android:id="@+id/edtTenPhim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên Phim"
+
+            />
+
+        <EditText
+            android:id="@+id/edtMoTa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mô tả"
+
+
+            />
+        <EditText
+            android:id="@+id/edtGiaPhim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Giá phim"
+            android:inputType="number"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgPhim"
+                android:layout_width="246dp"
+                android:layout_height="129dp"
+                android:src="@drawable/imgempty" />
+
+            <ImageView
+                android:id="@+id/ibtnUpFile"
+                android:layout_width="112dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/upfile" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="8">
+
+            <Button
+                android:id="@+id/btnThem"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+
+                android:text="Thêm" />
+
+            <Button
+                android:id="@+id/btnSua"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:text="Sửa" />
+
+            <Button
+                android:id="@+id/btnXoa"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:text="Xóa" />
+
+            <Button
+                android:id="@+id/btnHienThi"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:text="Hiển thị" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <GridView
+        android:id="@+id/gvListPhim"
+        android:layout_width="match_parent"
+        android:layout_height="405dp"
+        android:numColumns="2"
+        android:verticalSpacing="@android:dimen/app_icon_size"
+        android:horizontalSpacing="5dp"
+        android:gravity="center"
+        android:background="#333"
+
+
+        />
+</LinearLayout>

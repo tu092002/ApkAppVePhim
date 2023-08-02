@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:background="#190101"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/imgPhimGv"
+        android:scaleType="centerCrop"
+        android:background="#CDA8A5A5"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tvTenPhimGv"
+            android:layout_width="199dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:maxLength="20"
+            android:maxLines="2"
+            android:text="TÊN PHIM "
+            android:textColor="#DDE63A2D"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Giá"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:maxLines="@integer/material_motion_duration_medium_2"
+            android:layout_weight="1"
+
+            android:id="@+id/tvGiaPhimGv"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mô tả phimccddddddddddddddddddddddddddddddddddddddddđ"
+        android:textColor="#fff"
+        android:textStyle="italic"
+        android:textSize="20dp"
+        android:maxLines="@integer/material_motion_duration_medium_2"
+        android:id="@+id/tvMoTaGv"/>
+
+
+
+
+  </LinearLayout>

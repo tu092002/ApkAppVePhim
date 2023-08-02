@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    android:background="#190101"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/imgRapGv"
+        android:scaleType="centerCrop"
+        android:background="#CDA8A5A5"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên "
+        android:textColor="#DDE63A2D"
+        android:textSize="20dp"
+        android:maxLength="20"
+        android:maxLines="2"
+        android:textStyle="bold"
+        android:layout_gravity="left"
+        android:id="@+id/tvTenRapGv"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mô tả phimccddddddddddddddddddddddddddddddddddddddddđ"
+        android:textColor="#fff"
+        android:textStyle="italic"
+        android:textSize="20dp"
+        android:maxLines="@integer/material_motion_duration_medium_2"
+        android:id="@+id/tvMoTaRapGv"/>
+
+
+
+
+  </LinearLayout>
