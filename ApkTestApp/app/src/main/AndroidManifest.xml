@@ -13,6 +13,18 @@
         android:theme="@style/Theme.NavigationDrawer"
         tools:targetApi="31">
         <activity
+            android:name=".DateTimePickerTgXem"
+            android:exported="false" />
+        <activity
+            android:name=".ListRapDialog"
+            android:exported="false" />
+        <activity
+            android:name=".DatVe"
+            android:exported="false" />
+        <activity
+            android:name=".DetailPhim"
+            android:exported="false" />
+        <activity
             android:name=".Admin.AdminUser"
             android:exported="false" />
         <activity
@@ -20,12 +32,14 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

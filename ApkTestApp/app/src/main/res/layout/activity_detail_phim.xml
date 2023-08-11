@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetailPhim">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center"
+        android:text="Chi tiết phim"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tên Phim: "
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvTenPhimDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ma"
+            android:textColor="#333"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giá:  "
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvGiaPhimDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20000 vnd"
+            android:textColor="#333"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mô tả: "
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvMotaPhimDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đây là 1 phim kinh dị ....."
+            android:textColor="#333"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgPhimDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/imgempty" />
+
+    <Button
+        android:id="@+id/btnDatVePage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đặt Vé Phim"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

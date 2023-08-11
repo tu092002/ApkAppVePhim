@@ -29,10 +29,15 @@ public class VeDao {
         ContentValues values = new ContentValues();// Tạo đối tượng thêm dứ liệu
         //đưa dữ liệu vào đói tượng chứa
 //        values.put("maVe", u.getMaVe()); // tự tăng nên ko thêm
-        values.put("maUser", ve.getMaUser());
-        values.put("maGhe", ve.getMaGhe());
-        values.put("ngayDat", ve.getNgayDat());
-        values.put("ngayXem", ve.getNgayXem());
+        values.put("MaPhim", ve.getMaUser());
+        values.put("MaUser", ve.getMaUser());
+        values.put("MaRap", ve.getMaRap());
+        values.put("MaGhe", ve.getMaGhe());
+        values.put("GiaVe", ve.getGiaVe());
+        values.put("NgayDat", ve.getNgayDat().toString());
+        values.put("NgayXem", ve.getNgayDat().toString());
+        values.put("ThanhToan", ve.getThanhToan());
+
 
         // thực thi insert
 
