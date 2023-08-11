@@ -331,4 +331,12 @@ public class Database extends SQLiteOpenHelper {
 //        db.execSQL(fk_Ve_Ghe);
 //        db.execSQL(fk_Ghe_Rap);
     }
+
+    public Boolean checkLogin(String username, String password) {
+        SQLiteDatabase MyDatabase = this.getWritableDatabase();
+        Cursor cursor = MyDatabase.rawQuery("Select * from User where Username = ? and Password = ?", new String[]{username, password});
+        if (cursor.getCount() > 0)
+            return true;
+        return false;
+    }
 }
