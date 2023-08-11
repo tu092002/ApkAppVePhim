@@ -4,55 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/lavender_bkg"
+    android:gravity="top|center"
+    android:orientation="vertical"
     tools:context=".dangNhap">
-
-
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:background="@drawable/rounded_bkg"
+        android:layout_margin="15dp"
+        android:elevation="20dp"
+        >
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_gravity="center"
-
             android:layout_height="wrap_content"
-            android:text="ĐĂNG NHẬP" />
-
+            android:layout_gravity="center"
+            android:text="ĐĂNG NHẬP"
+            android:textSize="30dp"
+            android:textColor="#752D0C"
+            android:elevation="8dp"/>
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
             android:id="@+id/edtUsernameLogin"
             android:hint="username"
-
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/baseline_person_24"
+            android:drawablePadding="8dp"
+            android:background="@drawable/edittext_bkg"
+            android:elevation="8dp"
             />
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
             android:id="@+id/edtPasswordLogin"
             android:hint="password"
             android:inputType="textPassword"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:drawableLeft="@drawable/baseline_lock_24"
+            android:drawableRight="@drawable/baseline_remove_red_eye_24"
+            android:drawablePadding="8dp"
+            android:background="@drawable/edittext_bkg"
+            android:elevation="8dp"
             />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:id="@+id/btnDangNhap"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
             android:text="Đăng Nhập"
             android:layout_gravity="center"
-            android:id="@+id/btnDangNhap"
+            android:layout_marginTop="30dp"
+            android:textSize="15dp"
+            app:cornerRadius="30dp"
+            android:elevation="8dp"
             />
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Đăng Ký Page"
-            android:layout_gravity="center"
             android:id="@+id/btnDangKyPage"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Đăng Ký"
+            android:textSize="15dp"
+            app:cornerRadius="30dp"
+            android:elevation="8dp"
             />
     </LinearLayout>
 </LinearLayout>
