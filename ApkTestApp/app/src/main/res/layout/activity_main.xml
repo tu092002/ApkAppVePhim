@@ -27,7 +27,23 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/fragment_container"/>
+            android:id="@+id/fragment_container">
+
+            <GridView
+                android:id="@+id/gvListPhimMain"
+                android:layout_width="match_parent"
+                android:layout_height="405dp"
+                android:numColumns="2"
+                android:verticalSpacing="@android:dimen/app_icon_size"
+                android:horizontalSpacing="5dp"
+                android:gravity="center"
+                android:background="#333"
+
+
+                />
+
+        </FrameLayout>
+
 
     </LinearLayout>
 
@@ -40,5 +56,8 @@
         app:menu="@menu/nav_menu"
         app:itemIconTint="@color/lavender"
         app:itemTextColor="@color/lavender"/>
+
+
+
 
 </androidx.drawerlayout.widget.DrawerLayout>

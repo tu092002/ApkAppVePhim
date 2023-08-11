@@ -2,10 +2,17 @@ package com.nht.apktestapp.Dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.nht.apktestapp.Model.Ghe;
 import com.nht.apktestapp.Database;
+import com.nht.apktestapp.MainActivity;
+import com.nht.apktestapp.Model.Ghe;
+import com.nht.apktestapp.Model.Rap;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GheDao {
     private SQLiteDatabase db;
@@ -22,8 +29,66 @@ public class GheDao {
 
 
     }
+    public List<Ghe> getAllGheToString() {
+        List<Ghe> ls = new ArrayList<>();// Tao danh sách rỗng
+        // Tạo con trỏ đọc bảng dữ liệu phim
+        Cursor c = MainActivity.sqLiteDatabase.query("Ghe", null, null, null, null, null, null);
+        c.moveToFirst();/// Di chuyển con trỏ về bản ghi đầu tiên
+        // đọc
+        while (c.isAfterLast() == false) //  trong khi không phải dòng cuối thì vẫn đoọc
+        {
+            Ghe p = new Ghe();
+            p.setMaGhe(c.getInt(0));
+            p.setMaRap(c.getInt(1));
+            p.setTenGhe(c.getString(2));
+            p.setEmpty(Integer.parseInt(String.valueOf(c.getInt(3))));
 
 
+            // Chuyển đối tượng thành chuỗi
+            ls.add(p);
+
+            c.moveToNext();
+
+        }
+        c.close();
+
+        Collections.reverse(ls);// phim mới thêm sẽ hiện ở đầu tiên
+
+
+        return ls;
+    }
+    public List<Ghe> getGheByRap(Rap rap ){
+        List<Ghe> ls = new ArrayList<>();// Tao danh sách rỗng
+        // Tạo con trỏ đọc bảng dữ liệu phim
+        Cursor c =  MainActivity.database.GetData("SELECT * FROM Ghe g WHERE g."+MainActivity.database.TB_Ghe_MaRap +" = "
+                + rap.getMaRap() + "   ");
+        c.moveToFirst();/// Di chuyển con trỏ về bản ghi đầu tiên
+        // đọc
+        while (c.isAfterLast() == false) //  trong khi không phải dòng cuối thì vẫn đoọc
+        {
+            Ghe p = new Ghe();
+            p.setMaGhe(c.getInt(0));
+            p.setMaRap(c.getInt(1));
+
+            p.setTenGhe(c.getString(2));
+            p.setEmpty(Integer.parseInt(c.getString(3)));
+
+
+
+
+
+            // Chuyển đối tượng thành chuỗi
+            ls.add(p);
+
+            c.moveToNext();
+
+        }
+        c.close();
+        Collections.reverse(ls);// phim mới thêm sẽ hiện ở đầu tiên
+
+
+        return ls;
+    }
     public int InsertGhe(Ghe ghe) {
         ContentValues values = new ContentValues();// Tạo đối tượng thêm dứ liệu
         //đưa dữ liệu vào đói tượng chứa

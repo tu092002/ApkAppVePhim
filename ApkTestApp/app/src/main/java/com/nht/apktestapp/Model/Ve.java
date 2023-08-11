@@ -1,6 +1,5 @@
 package com.nht.apktestapp.Model;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class Ve {
@@ -10,16 +9,17 @@ public class Ve {
     private int maUser;
     private int maRap;
     private int maGhe;
+    private double giaVe;
 
 
-    private String ngayDat;
-    private String ngayXem;
-    private  String thanhToan;
+    private LocalDateTime ngayDat;
+    private LocalDateTime ngayXem;
+    private String thanhToan = "false";
 
     public Ve() {
     }
 
-    public Ve(int maVe, int maPhim, int maUser, int maRap, int maGhe, String ngayDat, String ngayXem, String thanhToan) {
+    public Ve(int maVe, int maPhim, int maUser, int maRap, int maGhe, LocalDateTime ngayDat, LocalDateTime ngayXem,double giaVe, String thanhToan) {
         this.maVe = maVe;
         this.maPhim = maPhim;
         this.maUser = maUser;
@@ -27,7 +27,32 @@ public class Ve {
         this.maGhe = maGhe;
         this.ngayDat = ngayDat;
         this.ngayXem = ngayXem;
+        this.giaVe = giaVe;
         this.thanhToan = thanhToan;
+    }
+
+    public double getGiaVe() {
+        return giaVe;
+    }
+
+    public void setGiaVe(double giaVe) {
+        this.giaVe = giaVe;
+    }
+
+    public LocalDateTime getNgayDat() {
+        return ngayDat;
+    }
+
+    public void setNgayDat(LocalDateTime ngayDat) {
+        this.ngayDat = ngayDat;
+    }
+
+    public LocalDateTime getNgayXem() {
+        return ngayXem;
+    }
+
+    public void setNgayXem(LocalDateTime ngayXem) {
+        this.ngayXem = ngayXem;
     }
 
     public int getMaPhim() {
@@ -46,17 +71,6 @@ public class Ve {
         this.maRap = maRap;
     }
 
-    public void setNgayDat(String ngayDat) {
-        this.ngayDat = ngayDat;
-    }
-
-    public String getNgayXem() {
-        return ngayXem;
-    }
-
-    public void setNgayXem(String ngayXem) {
-        this.ngayXem = ngayXem;
-    }
 
     public String getThanhToan() {
         return thanhToan;
@@ -90,10 +104,5 @@ public class Ve {
         this.maGhe = maGhe;
     }
 
-
-
-    public String getNgayDat() {
-        return ngayDat;
-    }
 
 }

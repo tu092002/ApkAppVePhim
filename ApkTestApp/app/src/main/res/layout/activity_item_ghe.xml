@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:orientation="vertical"
+
+    android:background="#190101"
+    >
+
+    <ImageView
+        android:id="@+id/imgGheGv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CDA8A5A5"
+        android:scaleType="centerInside"
+        android:src="@drawable/ghe"
+
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tên "
+        android:textColor="#DDE63A2D"
+        android:textSize="20dp"
+        android:maxLength="20"
+        android:maxLines="2"
+        android:textStyle="bold"
+        android:layout_gravity="left"
+        android:id="@+id/tvTenGheGv"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="empty"
+        android:textColor="#DDE63A2D"
+        android:textSize="20dp"
+        android:maxLength="5"
+        android:maxLines="2"
+        android:textStyle="bold"
+        android:layout_gravity="left"
+        android:id="@+id/tvEmptyGv"/>
+
+
+
+
+
+</LinearLayout>

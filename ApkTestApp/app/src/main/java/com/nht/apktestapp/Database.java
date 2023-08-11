@@ -1,7 +1,5 @@
 package com.nht.apktestapp;
 
-import static java.sql.Types.TIMESTAMP;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,7 +16,7 @@ public class Database extends SQLiteOpenHelper {
     public static String TB_User = "User";
     public static String TB_Phim = "Phim";
     public static String TB_Ve = "Ve";
-//    public static String TB_LoaiVe = "LoaiVe";
+    //    public static String TB_LoaiVe = "LoaiVe";
 //    public static String TB_ChiTietPhim = "ChiTietPhim";
     public static String TB_Rap = "Rap";
     public static String TB_Ghe = "Ghe";
@@ -35,7 +33,7 @@ public class Database extends SQLiteOpenHelper {
     public static String TB_User_Password = "Password";
     public static String TB_User_Role = "Role";
     public static String TB_User_Avt = "Avt";
-    public static  String TB_User_Online = "Online";
+    public static String TB_User_Online = "Online";
 
     //Phim
     public static String TB_Phim_MaPhim = "MaPhim";
@@ -51,11 +49,12 @@ public class Database extends SQLiteOpenHelper {
     public static String TB_Ve_MaRap = "MaRap";
 
     public static String TB_Ve_MaGhe = "MaGhe";
+    public static String TB_Ve_GiaVe = "GiaVe";
+
     public static String TB_Ve_NgayDat = "NgayDat";
     public static String TB_Ve_NgayXem = "NgayXem";
-    public static String TB_Ve_GiaVe = "GiaVe";
     public static String TB_Ve_ThanhToan = "ThanhToan";
-//    //LoaiVe
+    //    //LoaiVe
 //    public static String TB_LoaiVe_MaLoaiVe = "MaLoaiVe";
 //    public static String TB_LoaiVe_DonGia = "DonGia";
 //    public static String TB_LoaiVe_TenLoaiVe = "TenLoaiVe";
@@ -90,56 +89,61 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        // quan hệ khóa ngoại
-        // ve
-        String fk_Ve_User = "ALTER TABLE " + TB_Ve + " ADD CONSTRAINT fk_Ve_User FOREIGN KEY (MaUser) REFERENCES " + TB_User + "(MaUser)";
-        String fk_Ve_Phim = "ALTER TABLE " + TB_Ve + " ADD CONSTRAINT fk_Ve_Phim FOREIGN KEY (MaPhim) REFERENCES " + TB_Phim + "(MaPhim)";
-        String fk_Ve_Ghe = "ALTER TABLE " + TB_Ve + " ADD CONSTRAINT fk_Ve_Ghe FOREIGN KEY (MaGhe) REFERENCES " + TB_Ghe + "(MaGhe)";
-
-        // ghế của rạp nào
-        String fk_Ghe_Rap = "ALTER TABLE " + TB_Ghe  + "ADD CONTRAINT fk_Ghe_Rap  FOREIGN KEY (MaRap) REFERENCES " + TB_Rap  +"(MaRap)";
-
-
-
-
-
-        String tbXuatChieu = "CREATE TABLE IF NOT EXISTS "+ TB_XuatChieu + "(" + TB_XuatChieu_MaXuatChieu + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + TB_XuatChieu_MaPhim + "INTEGER, "+TB_XuatChieu_ThoiGian+" DATETIME)";
+        String tbXuatChieu = "CREATE TABLE IF NOT EXISTS " + TB_XuatChieu + "("
+                + TB_XuatChieu_MaXuatChieu + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + TB_XuatChieu_MaPhim + "INTEGER, "
+                + TB_XuatChieu_ThoiGian + " DATETIME)";
 
         String tbUser = "CREATE TABLE IF NOT EXISTS " + TB_User + "(" + TB_User_MaUser + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + TB_User_HoTen + " TEXT, " + TB_User_UserName + " TEXT, " + TB_User_Password + " TEXT, "
-                + TB_User_Role + " TEXT, " + TB_User_Avt + " BLOB,"+TB_User_Online+" TEXT )";
+                + TB_User_HoTen + " TEXT, "
+                + TB_User_UserName + " TEXT, "
+                + TB_User_Password + " TEXT, "
+                + TB_User_Role + " TEXT, "
+                + TB_User_Avt + " BLOB,"
+                + TB_User_Online + " TEXT )";
+
         String tbPhim = "CREATE TABLE  IF NOT EXISTS " + TB_Phim + " (" + TB_Phim_MaPhim + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + TB_Phim_TenPhim + " TEXT, " + TB_Phim_MoTa + " TEXT," + TB_Phim_ImgPhim + " BLOB, "+TB_Phim_GiaPhim+ " DOUBLE )";
+                + TB_Phim_TenPhim + " TEXT, "
+                + TB_Phim_MoTa + " TEXT,"
+                + TB_Phim_ImgPhim + " BLOB, "
+                + TB_Phim_GiaPhim + " DOUBLE )";
 
 
         String tbVe = "CREATE TABLE IF NOT EXISTS " + TB_Ve + " (" + TB_Ve_MaVe + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + TB_Ve_MaPhim + " INTEGER, " + TB_Ve_MaUser + " INTEGER, " + TB_Ve_MaRap + " INTEGER, " + TB_Ve_MaGhe + " INTEGER, "+TB_Ve_NgayDat +
-                " TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +TB_Ve_NgayXem+" DATETIME , "+TB_Ve_GiaVe +" DOUBLE, "+TB_Ve_ThanhToan+" TEXT)";
+                + TB_Ve_MaPhim + " INTEGER, "
+                + TB_Ve_MaUser + " INTEGER, "
+                + TB_Ve_MaRap + " INTEGER, "
+                + TB_Ve_MaGhe + " INTEGER, "
+                + TB_Ve_NgayDat + " TEXT, "
+                + TB_Ve_NgayXem + " TEXT , "
+                + TB_Ve_GiaVe + " DOUBLE, "
+                + TB_Ve_ThanhToan + " TEXT, "
+                + "FOREIGN KEY ("+TB_Ve_MaPhim+") REFERENCES " + TB_Phim + "("+TB_Phim_MaPhim+"), "
+                + "FOREIGN KEY ("+TB_Ve_MaUser+") REFERENCES " + TB_User + "("+TB_User_MaUser +"), "
+                + "FOREIGN KEY ("+TB_Ve_MaRap+") REFERENCES " + TB_Rap + "("+TB_Rap_MaRap +"), "
+                + "FOREIGN KEY ("+TB_Ve_MaGhe+") REFERENCES " + TB_Ghe + "("+TB_Ghe_MaGhe+")) ";
 
-//        String tbLoaiVe = "CREATE TABLE IF NOT EXISTS " + TB_LoaiVe + "(" + TB_LoaiVe_MaLoaiVe + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-//                + TB_LoaiVe_TenLoaiVe + " TEXT, " + TB_LoaiVe_DonGia + " INTEGER)";
-//        String tbChiTietPhim = "CREATE TABLE  IF NOT EXISTS " + TB_ChiTietPhim + "(" + TB_ChiTietPhim_MaChiTietPhim + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-//                + TB_ChiTietPhim_MaRap + " INTEGER ," + TB_ChiTietPhim_MaPhim + " INTEGER ," + TB_ChiTietPhim_MaVe + " INTEGER, "
-//                + TB_ChiTietPhim_XuatChieu + " DATETIME)";
         String tbRap = "CREATE TABLE IF NOT EXISTS " + TB_Rap + "(" + TB_Rap_MaRap + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                   + TB_Rap_TenRap + " TEXT,  "+TB_Rap_MoTaRap+" TEXT, "+TB_Rap_ImgRap+" BLOB)";
-        String tbGhe = "CREATE TABLE IF NOT EXISTS " + TB_Ghe + "(" + TB_Ghe_MaGhe + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + TB_Ghe_MaRap + " INTEGER, " +TB_Ghe_TenGhe +" TEXT, "+ TB_Ghe_Empty + " TEXT)";
+                + TB_Rap_TenRap + " TEXT,  "
+                + TB_Rap_MoTaRap + " TEXT, "
+                + TB_Rap_ImgRap + " BLOB)";
+
+        String tbGhe = "CREATE TABLE IF NOT EXISTS "
+                + TB_Ghe + "(" + TB_Ghe_MaGhe + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + TB_Ghe_MaRap + " INTEGER, "
+                + TB_Ghe_TenGhe + " TEXT, "
+                + TB_Ghe_Empty + " TEXT, "
+                + "FOREIGN KEY ("+TB_Ghe_MaRap+") REFERENCES " + TB_Rap + "("+TB_Rap_MaRap + ")) ";
+
 
         db.execSQL(tbXuatChieu);
         db.execSQL(tbUser);
         db.execSQL(tbPhim);
         db.execSQL(tbVe);
-//        db.execSQL(tbLoaiVe);
-//        db.execSQL(tbChiTietPhim);
         db.execSQL(tbRap);
         db.execSQL(tbGhe);
-//        db.execSQL(fk_Ve_User);
-//        db.execSQL(fk_Ve_Phim);
-//        db.execSQL(fk_Ve_LoaiVe);
-//        db.execSQL(fk_Ve_Ghe);
-//        db.execSQL(fk_Ghe_Rap);
+
+
 
     }
 
@@ -149,10 +153,6 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-    //    public Cursor GetData(String sql, String s[]) {
-//        SQLiteDatabase db = getReadableDatabase();
-//        return db.rawQuery(sql, s);
-//    }
     public Cursor GetData(String query) {
         SQLiteDatabase db = getReadableDatabase();
 
@@ -185,6 +185,7 @@ public class Database extends SQLiteOpenHelper {
         }
 
     }
+
     public int InsertRapToDb(Rap p) {
         try {
             SQLiteDatabase db = getReadableDatabase();
@@ -203,10 +204,11 @@ public class Database extends SQLiteOpenHelper {
         }
 
     }
+
     public int InsertUser(User p) {
         try {
             SQLiteDatabase db = getReadableDatabase();
-            String sql = "INSERT INTO User VALUES(null, ?, ?, ?, ?, ?, ?)"  ;
+            String sql = "INSERT INTO User VALUES(null, ?, ?, ?, ?, ?, ?)";
             SQLiteStatement statement = db.compileStatement(sql);
             statement.clearBindings();
 
@@ -224,6 +226,7 @@ public class Database extends SQLiteOpenHelper {
         }
 
     }
+
     public boolean isUsernameExists(String username) {
         SQLiteDatabase db = getReadableDatabase();
 
@@ -234,7 +237,7 @@ public class Database extends SQLiteOpenHelper {
 
         // Điều kiện WHERE để tìm kiếm username cụ thể
         String selection = "username = ?";
-        String[] selectionArgs = { username };
+        String[] selectionArgs = {username};
 
         // Thực hiện truy vấn SELECT
         Cursor cursor = db.query(
@@ -290,7 +293,7 @@ public class Database extends SQLiteOpenHelper {
 
             // Lấy thông tin người dùng khác nếu có
 
-            user = new User(maUserFromDB, hoTenFromDB, usernameFromDB, passwordFromDB, roleFromDB, imgAvtFromDB,OnlineFromDB);
+            user = new User(maUserFromDB, hoTenFromDB, usernameFromDB, passwordFromDB, roleFromDB, imgAvtFromDB, OnlineFromDB);
             // Tạo đối tượng User từ thông tin lấy được
         }
 
@@ -304,15 +307,28 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //SQLite  KHÔNG CHO PHÉP DÙNG ALTER TABLE  để gắn FOREIGN KEY VÀO ĐC------------------------------------
+//        String fk_Ve_Phim = "ALTER TABLE " + TB_Ve + " ADD CONSTRAINT fk_Ve_Phim FOREIGN KEY (MaPhim) REFERENCES " + TB_Phim + "(MaPhim)";
+//        String fk_Ve_User = "ALTER TABLE " + TB_Ve + " ADD CONSTRAINT fk_Ve_User FOREIGN KEY (MaUser) REFERENCES " + TB_User + "(MaUser)";
+//        String fk_Ve_Rap = "ALTER TABLE " + TB_Ve + " ADD CONSTRAINT fk_Ve_Rap FOREIGN KEY (MaRap) REFERENCES " + TB_Rap + "(MaRap)";
+//        String fk_Ve_Ghe = "ALTER TABLE " + TB_Ve + " ADD CONSTRAINT fk_Ve_Ghe FOREIGN KEY (MaGhe) REFERENCES " + TB_Ghe + "(MaGhe)";
+//
+//        // ghế của rạp nào
+//        String fk_Ghe_Rap = "ALTER TABLE " + TB_Ghe + " ADD CONSTRAINT fk_Ghe_Rap  FOREIGN KEY (MaRap) REFERENCES " + TB_Rap + "(MaRap)";
 
         // chỉ dùng khi ta tạo db bằng contructor(context) khi đó
         // cả hàm oncreate cùng phải sẽ đc ngầm gọi mà ta ko cần gọi ra
         db.execSQL("DROP TABLE IF EXISTS " + TB_User + "");
         db.execSQL("DROP TABLE IF EXISTS " + TB_Phim + "");
         db.execSQL("DROP TABLE IF EXISTS " + TB_Ve + "");
-//        db.execSQL("DROP TABLE IF EXISTS " + TB_LoaiVe + "");
         db.execSQL("DROP TABLE IF EXISTS " + TB_Rap + "");
         db.execSQL("DROP TABLE IF EXISTS " + TB_Ghe + "");
-//        db.execSQL("DROP TABLE IF EXISTS " + TB_ChiTietPhim + "");
+
+//
+//        db.execSQL(fk_Ve_Phim);
+//        db.execSQL(fk_Ve_User);
+//        db.execSQL(fk_Ve_Rap);
+//        db.execSQL(fk_Ve_Ghe);
+//        db.execSQL(fk_Ghe_Rap);
     }
 }
