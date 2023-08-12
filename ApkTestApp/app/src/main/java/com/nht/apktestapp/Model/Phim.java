@@ -1,5 +1,7 @@
 package com.nht.apktestapp.Model;
 
+import java.util.List;
+
 public class Phim {
 
     private int maPhim;

@@ -58,7 +58,7 @@ public class GheAdapter extends BaseAdapter {
         Ghe ghe = arrayList.get(position);
         //Gán giá trị
         viewHolder.tvTenGheGv.setText(arrayList.get(position).getTenGhe());
-        viewHolder.tvEmptyGv.setText(Integer.toString(arrayList.get(position).getEmpty()));
+        viewHolder.tvEmptyGv.setText(arrayList.get(position).getEmpty());
 //        viewHolder.imgPhimGv.setImageResource(arrayList.get(position).getImgPhim());
 
         // chuyển byte[] => bitmap

@@ -2,10 +2,19 @@ package com.nht.apktestapp.Dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.nht.apktestapp.Model.Ve;
+import androidx.annotation.NonNull;
+
 import com.nht.apktestapp.Database;
+import com.nht.apktestapp.MainActivity;
+import com.nht.apktestapp.Model.Ve;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VeDao {
 
@@ -25,17 +34,27 @@ public class VeDao {
     public VeDao() {
     }
 
-    public int InsertVe(Ve ve) {
+    // hàm insert ko dùng đc mà phải insert query
+    // trực tiếp mới đc vì kiểu local time=> string
+
+    public int InsertVe(@NonNull Ve ve) {
         ContentValues values = new ContentValues();// Tạo đối tượng thêm dứ liệu
         //đưa dữ liệu vào đói tượng chứa
 //        values.put("maVe", u.getMaVe()); // tự tăng nên ko thêm
-        values.put("MaPhim", ve.getMaUser());
+
+
+        // Định dạng ngày giờ
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+
+        values.put("MaPhim", ve.getMaPhim());
         values.put("MaUser", ve.getMaUser());
         values.put("MaRap", ve.getMaRap());
         values.put("MaGhe", ve.getMaGhe());
+        values.put("NgayDat", ve.getNgayDat().format(formatter));
+        values.put("NgayXem", ve.getNgayXem().format(formatter));
         values.put("GiaVe", ve.getGiaVe());
-        values.put("NgayDat", ve.getNgayDat().toString());
-        values.put("NgayXem", ve.getNgayDat().toString());
+
         values.put("ThanhToan", ve.getThanhToan());
 
 
@@ -49,5 +68,50 @@ public class VeDao {
         return 1;
 
     }
+
+    public List<Ve> getListCartOrVe(){
+        List<Ve>  ls =  new ArrayList<>();
+        // Tạo con trỏ đọc bảng dữ liệu phim
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+        Cursor c = MainActivity.sqLiteDatabase.query("Ve", null, null, null, null, null, null);
+        c.moveToFirst();/// Di chuyển con trỏ về bản ghi đầu tiên
+        // đọc
+        while (c.isAfterLast() == false) //  trong khi không phải dòng cuối thì vẫn đoọc
+        {
+            Ve p = new Ve();
+            p.setMaVe(c.getInt(0));
+            p.setMaPhim(c.getInt(1));
+            p.setMaUser(c.getInt(2));
+            p.setMaRap(c.getInt(3));
+            p.setMaGhe(c.getInt(4));
+            p.setNgayDat(LocalDateTime.parse(c.getString(5),formatter));
+            p.setNgayXem(LocalDateTime.parse(c.getString(6),formatter));
+            p.setGiaVe(c.getDouble(7));
+            p.setThanhToan(c.getString(8));
+
+
+
+
+            // Chuyển đối tượng thêm vào mảng List <Ve>
+            ls.add(p);
+
+            c.moveToNext();
+
+        }
+        c.close();
+
+
+
+        return ls;
+    }
+    public int DeleteVe(int MaVe){
+        int kq = MainActivity.sqLiteDatabase.delete("Ve", "MaVe=?",  new String[]{""+ MaVe + ""});
+        if (kq <= 0) {
+            return -1; // Xóa thát bại
+        }
+        return 1;
+    }
+
 }
 

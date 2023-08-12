@@ -45,12 +45,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static Database database;
     public static SQLiteDatabase sqLiteDatabase;
     ImageView imgAvtMainAct;
-    private DrawerLayout drawerLayout;
     PhimDao phimDao;
     PhimAdapter adapter;
     Context context;
     List<Phim> list = new ArrayList<>(); // tạo danh sách rỗng    PhimAdapter adapter;
     GridView gvListPhimMain;
+    private DrawerLayout drawerLayout;
+
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -62,9 +64,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 // Tạo database
         database = new Database(this, "film.sqlite", null, 1);
         sqLiteDatabase = database.getWritableDatabase(); // cái này cho phép ghi dữ liệu database
-
-
-
 
         // tạo hình avt
 //        imgAvtMainAct = (ImageView) findViewById(R.id.imgAvtMainAct);
@@ -86,18 +85,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-                        Intent i  = new Intent(MainActivity.this, DetailPhim.class);
+                Intent i = new Intent(MainActivity.this, DetailPhim.class);
 
-                        Bundle b = new Bundle();
-                        b.putString("POSITION", String.valueOf(position));
-                        i.putExtras(b);
-                        Toast.makeText(MainActivity.this, "Phim " + list.get(position).getTenPhim(), Toast.LENGTH_SHORT).show();
-                        startActivity(i);
+                Bundle b = new Bundle();
+                b.putString("POSITION", String.valueOf(position));
+                i.putExtras(b);
+                Toast.makeText(MainActivity.this, "Phim " + list.get(position).getTenPhim(), Toast.LENGTH_SHORT).show();
+                startActivity(i);
 
             }
 
         });
 
+        Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
+        setSupportActionBar(toolbar);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
 //    Toolbar toolbar1 = (Toolbar) findViewById(R.id.toolbar);
 //    toolbar1.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +111,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            startActivity(new Intent(MainActivity.this, HeaderActivity.class));
 //        }
 //    });
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav,
+                R.string.close_nav);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
 
 
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
@@ -144,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
    }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

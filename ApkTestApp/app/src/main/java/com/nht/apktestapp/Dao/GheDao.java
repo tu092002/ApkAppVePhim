@@ -41,7 +41,7 @@ public class GheDao {
             p.setMaGhe(c.getInt(0));
             p.setMaRap(c.getInt(1));
             p.setTenGhe(c.getString(2));
-            p.setEmpty(Integer.parseInt(String.valueOf(c.getInt(3))));
+            p.setEmpty(c.getString(3));
 
 
             // Chuyển đối tượng thành chuỗi
@@ -60,8 +60,10 @@ public class GheDao {
     public List<Ghe> getGheByRap(Rap rap ){
         List<Ghe> ls = new ArrayList<>();// Tao danh sách rỗng
         // Tạo con trỏ đọc bảng dữ liệu phim
-        Cursor c =  MainActivity.database.GetData("SELECT * FROM Ghe g WHERE g."+MainActivity.database.TB_Ghe_MaRap +" = "
-                + rap.getMaRap() + "   ");
+//        Cursor c =  MainActivity.database.GetData("SELECT * FROM Ghe  WHERE "+MainActivity.database.TB_Ghe_MaRap +" = "
+//                + rap.getMaRap() + "   ");
+        Cursor c = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM Ghe Where ? = MaRap", new String[]{Integer.toString(rap.getMaRap())});
+
         c.moveToFirst();/// Di chuyển con trỏ về bản ghi đầu tiên
         // đọc
         while (c.isAfterLast() == false) //  trong khi không phải dòng cuối thì vẫn đoọc
@@ -71,7 +73,7 @@ public class GheDao {
             p.setMaRap(c.getInt(1));
 
             p.setTenGhe(c.getString(2));
-            p.setEmpty(Integer.parseInt(c.getString(3)));
+            p.setEmpty(c.getString(3));
 
 
 
