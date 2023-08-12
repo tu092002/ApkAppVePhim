@@ -12,6 +12,9 @@ import com.nht.apktestapp.Model.Phim;
 import com.nht.apktestapp.Model.Rap;
 import com.nht.apktestapp.Model.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Database extends SQLiteOpenHelper {
     public static String TB_User = "User";
     public static String TB_Phim = "Phim";
@@ -339,4 +342,21 @@ public class Database extends SQLiteOpenHelper {
             return true;
         return false;
     }
+    public List<String> getImageUrlsFromDatabase() {
+        List<String> urls = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db != null) {
+            Cursor cursor = db.rawQuery("SELECT ImgPhim FROM Phim", null);
+            if (cursor != null && cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex("ImgPhim");
+                do {
+                    String url = cursor.getString(columnIndex);
+                    urls.add(url);
+                } while (cursor.moveToNext());
+                cursor.close();
+            }
+        }
+        return urls;
+    }
+
 }

@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -26,10 +29,18 @@ import com.nht.apktestapp.Admin.AdminRap;
 import com.nht.apktestapp.Dao.PhimDao;
 import com.nht.apktestapp.Model.Phim;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ViewFlipper viewFlipper;
+    private List<String> imageUrls;
+
 
     public static Database database;
     public static SQLiteDatabase sqLiteDatabase;
@@ -53,17 +64,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sqLiteDatabase = database.getWritableDatabase(); // cái này cho phép ghi dữ liệu database
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
-        setSupportActionBar(toolbar);
-
-        drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav,
-                R.string.close_nav);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
 
 
         // tạo hình avt
@@ -99,9 +99,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
+//    Toolbar toolbar1 = (Toolbar) findViewById(R.id.toolbar);
+//    toolbar1.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            startActivity(new Intent(MainActivity.this, HeaderActivity.class));
+//        }
+//    });
 
 
-    }
+        Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
+        setSupportActionBar(toolbar);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav,
+                R.string.close_nav);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+
+
+        //Khu vực khai báo, tạo viewFlipper
+//        ImageView imgv1 = (ImageView) findViewById(R.id.imgv1);
+//        ImageView imgv2 = (ImageView) findViewById(R.id.imgv2);
+//        ImageView imgv3 = (ImageView) findViewById(R.id.imgv3);
+//        ImageView imgv4 = (ImageView) findViewById(R.id.imgv4);
+//        ImageView imgv5 = (ImageView) findViewById(R.id.imgv5);
+
+        //list chứa danh sách phim
+        for (int i = 0; i < 5; i++) {
+            // Lấy tham chiếu đến ImageView và gắn hình ảnh cho nó
+            ImageView imageView = findViewById(getResources().getIdentifier("imgv" + (i+1), "id", getPackageName()));
+//            imageView.setImageResource(list.get(i).getImgPhim());
+            byte[] imgByte = list.get(i).getImgPhim(); // Lấy mảng byte của hình ảnh từ đối tượng phim
+            // Tạo đối tượng Bitmap từ mảng byte
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
+            // Gắn hình ảnh vào ImageView
+             // Thay thế R.id.imageView bằng ID của ImageView của bạn
+            imageView.setImageBitmap(bitmap);
+        }
+
+
+   }
 
 
     @Override
@@ -118,6 +160,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Xử lý logout nếu cần thiết
         } else if (itemId == R.id.btnDangKyPage) {
             startActivity(new Intent(this, dangKy.class));
+            // Xử lý logout nếu cần thiết
+        }  else if (itemId == R.id.btnThongKe) {
+            startActivity(new Intent(this, ChartActivity.class));
             // Xử lý logout nếu cần thiết
         }
 

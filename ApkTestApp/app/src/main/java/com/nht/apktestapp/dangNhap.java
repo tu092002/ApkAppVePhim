@@ -16,6 +16,7 @@ public class dangNhap extends AppCompatActivity {
     EditText edtUsernameLogin, edtPasswordLogin;
     Button btnDangKyPage;
     Button btnDangNhap;
+    public static String username, password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +34,8 @@ public class dangNhap extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try{
-                    String username = edtUsernameLogin.getText().toString();
-                    String password = edtPasswordLogin.getText().toString();
+                    username = edtUsernameLogin.getText().toString();
+                    password = edtPasswordLogin.getText().toString();
                     if(username.equals("")||password.equals(""))
                         Toast.makeText(dangNhap.this, "Chưa nhập username hoặc password", Toast.LENGTH_SHORT).show();
                     else {
