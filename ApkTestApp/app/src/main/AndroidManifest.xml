@@ -5,20 +5,29 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_movie"
         android:supportsRtl="true"
         android:theme="@style/Theme.NavigationDrawer"
-        tools:targetApi="31"
-        android:hardwareAccelerated="true"
-        android:enableOnBackInvokedCallback="true">
+        tools:targetApi="31">
         <activity
-            android:name=".DateTimePickerTgXem"
+            android:name=".itemCart"
+            android:exported="false" />
+        <activity
+            android:name=".DateTimePickerDialog"
             android:exported="false" />
         <activity
             android:name=".ListRapDialog"
+            android:exported="false" />
+        <activity
+            android:name=".ListGheDialog"
+            android:exported="false" />
+        <activity
+            android:name=".ListCartDialog"
             android:exported="false" />
         <activity
             android:name=".DatVe"

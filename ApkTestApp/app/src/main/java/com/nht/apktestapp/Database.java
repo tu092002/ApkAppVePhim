@@ -118,10 +118,10 @@ public class Database extends SQLiteOpenHelper {
                 + TB_Ve_NgayXem + " TEXT , "
                 + TB_Ve_GiaVe + " DOUBLE, "
                 + TB_Ve_ThanhToan + " TEXT, "
-                + "FOREIGN KEY ("+TB_Ve_MaPhim+") REFERENCES " + TB_Phim + "("+TB_Phim_MaPhim+"), "
-                + "FOREIGN KEY ("+TB_Ve_MaUser+") REFERENCES " + TB_User + "("+TB_User_MaUser +"), "
-                + "FOREIGN KEY ("+TB_Ve_MaRap+") REFERENCES " + TB_Rap + "("+TB_Rap_MaRap +"), "
-                + "FOREIGN KEY ("+TB_Ve_MaGhe+") REFERENCES " + TB_Ghe + "("+TB_Ghe_MaGhe+")) ";
+                + "FOREIGN KEY (" + TB_Ve_MaPhim + ") REFERENCES " + TB_Phim + "(" + TB_Phim_MaPhim + "), "
+                + "FOREIGN KEY (" + TB_Ve_MaUser + ") REFERENCES " + TB_User + "(" + TB_User_MaUser + "), "
+                + "FOREIGN KEY (" + TB_Ve_MaRap + ") REFERENCES " + TB_Rap + "(" + TB_Rap_MaRap + "), "
+                + "FOREIGN KEY (" + TB_Ve_MaGhe + ") REFERENCES " + TB_Ghe + "(" + TB_Ghe_MaGhe + ")) ";
 
         String tbRap = "CREATE TABLE IF NOT EXISTS " + TB_Rap + "(" + TB_Rap_MaRap + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_Rap_TenRap + " TEXT,  "
@@ -133,7 +133,7 @@ public class Database extends SQLiteOpenHelper {
                 + TB_Ghe_MaRap + " INTEGER, "
                 + TB_Ghe_TenGhe + " TEXT, "
                 + TB_Ghe_Empty + " TEXT, "
-                + "FOREIGN KEY ("+TB_Ghe_MaRap+") REFERENCES " + TB_Rap + "("+TB_Rap_MaRap + ")) ";
+                + "FOREIGN KEY (" + TB_Ghe_MaRap + ") REFERENCES " + TB_Rap + "(" + TB_Rap_MaRap + ")) ";
 
 
         db.execSQL(tbXuatChieu);
@@ -142,7 +142,6 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(tbVe);
         db.execSQL(tbRap);
         db.execSQL(tbGhe);
-
 
 
     }
@@ -185,6 +184,8 @@ public class Database extends SQLiteOpenHelper {
         }
 
     }
+
+
 
     public int InsertRapToDb(Rap p) {
         try {

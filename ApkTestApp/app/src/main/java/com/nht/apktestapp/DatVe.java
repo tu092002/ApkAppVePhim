@@ -1,9 +1,12 @@
 package com.nht.apktestapp;
 
+import static com.nht.apktestapp.DateTimePickerDialog.dateTimeNgayXem;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nht.apktestapp.Adapters.GheAdapter;
 import com.nht.apktestapp.Adapters.RapAdapter;
+import com.nht.apktestapp.Adapters.VeAdapter;
 import com.nht.apktestapp.Dao.GheDao;
 import com.nht.apktestapp.Dao.PhimDao;
 import com.nht.apktestapp.Dao.RapDao;
@@ -20,6 +24,8 @@ import com.nht.apktestapp.Model.Phim;
 import com.nht.apktestapp.Model.Rap;
 import com.nht.apktestapp.Model.Ve;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +38,9 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
     PhimDao phimDao;
     RapDao rapDao;
     GheDao gheDao;
-    Button btnChonRap, btnDateTimePickerTgXemPage, btnDatVe;
+    Button btnChonRap, btnDateTimePickerTgXemPage, btnDatVe, btnChonGhe;
+    ImageButton ibtnCartDialog;
+    TextView tvBadge;
     RapAdapter rapAdapter;
     GheAdapter gheAdapter;
     GridView gvlistRapDatVe;
@@ -41,25 +49,28 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
     String dateTimeString;
     Rap rapShowGhe;
     Ve veDat;
+    Ghe  gheChon;
+
     VeDao veDao;
+    VeAdapter  veAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dat_ve);
         // anhs xa và khởi tạo
+        tvBadge = (TextView) findViewById(R.id.tvBadge);
         tvTenPhimDatVe = (TextView) findViewById(R.id.tvTenPhimDatVe);
         tvGiaPhimDatVe = (TextView) findViewById(R.id.tvGiaPhimDatVe);
         btnDateTimePickerTgXemPage = (Button) findViewById(R.id.btnDateTimePickerTgXemPage);
+        btnChonGhe = (Button) findViewById(R.id.btnChonGhe);
         btnDatVe = (Button) findViewById(R.id.btnDatVe);
+        ibtnCartDialog = (ImageButton) findViewById(R.id.ibtnCartDialog);
         rapDao = new RapDao();
         gheDao = new GheDao();
         phimDao = new PhimDao();
-
         // lấy đc listRap, rùi lấy ra cái rạp ng dùng click vô
-        listRap = rapDao.getAllRapToString();
         System.out.println(listRap);
-        rapShowGhe = listRap.get(ListRapDialog.indexRapChon - 1);
 
 
         list = phimDao.getAllPhimToString();
@@ -67,9 +78,12 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
         btnChonRap = (Button) findViewById(R.id.btnChonRap);
         tvTenPhimDatVe.setText(phim.getTenPhim());
         tvGiaPhimDatVe.setText(Double.toString(phim.getGiaPhim()));
+        veDao = new VeDao();
+        List<Ve>  listCart  = veDao.getListCartOrVe();
+
+        tvBadge.setText(Integer.toString(listCart.size()));
+
         // Tạo một danh sách các mục
-
-
 
 
         btnChonRap.setOnClickListener(new View.OnClickListener() {
@@ -105,44 +119,55 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
                 // 2. Mã phim
                 int maPhim = phim.getMaPhim();
                 //3. Mã User
-                int maUser = 2;
+                int maUser = 1;
 
                 //4. Ma Rap
-                int maRap = rapShowGhe.getMaRap();
-                Toast.makeText(DatVe.this, "thêm thành côg" + maRap, Toast.LENGTH_SHORT).show();
-//
-//                // 5. Ma ghế
-//                int maGhe = 4;
-//                // 6. gia ve
-//                double giaVe = phim.getGiaPhim();
+                listRap = rapDao.getAllRapToString();
 
-//                // 7.ngay Dat
-//                LocalDateTime currentDate = LocalDateTime.now();
-//                LocalDateTime ngayDatDateTime = currentDate;
+                rapShowGhe = listRap.get(ListRapDialog.indexRapChon);
+
+                int maRap = rapShowGhe.getMaRap();
 //
-//                // Định dạng Chung cho  ngày tháng
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-//                //8. Ngày xem:  lấy ngày đặt là tg hiện tại
-//
-//                // định dạng từ CHuỗi => localDateTime
-//                LocalDateTime ngayXemDatetime = LocalDateTime.parse(dateTimeString, formatter);
-//
-//                // 9.thanh toanas ==  false
-//                // 10. TẠO VÉ
-//                Ve veDat = new Ve(maVe, maPhim, maUser, maRap, maGhe, ngayDatDateTime, ngayXemDatetime, giaVe, "false");
-//
-//
-//                long i = veDao.InsertVe(veDat);
-//                if (i == 1){
-//                    Toast.makeText(DatVe.this, "thêm thành côg", Toast.LENGTH_SHORT).show();
-//                }
-//                else {
-//                    Toast.makeText(DatVe.this, "thêm thất bại", Toast.LENGTH_SHORT).show();
-//
-//                }
+                // 5. Ma ghế
+                listGhe = gheDao.getGheByRap(rapShowGhe);
+                gheChon = listGhe.get(ListGheDialog.indexGheChon);
+
+                int maGhe = gheChon.getMaGhe();
+                // 6. gia ve
+                double giaVe = phim.getGiaPhim();
+                try {
+                    LocalDateTime currentDate = LocalDateTime.now();
+                    LocalDateTime ngayDatDateTime = currentDate;
+
+                    // Định dạng Chung cho  ngày tháng
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+                    //8. Ngày xem:  lấy ngày đặt là tg hiện tại
+
+                    //  localDateTime ngayxem đã được lấy từ dialog DatetimepIcker từ user chọn
+                    LocalDateTime ngayXemDatetime = dateTimeNgayXem;
+                    // 9.thanh toanas ==  false
+                    String thanhToan = "false";
+                    // 10. TẠO VÉ
+                    veDat = new Ve(maVe, maPhim, maUser, maRap, maGhe, ngayDatDateTime, ngayXemDatetime, giaVe, "false");
+                    MainActivity.database.Querydata("insert into Ve(MaPhim, MaUser, MaRap, MaGhe, NgayDat, NgayXem, GiaVe, ThanhToan)"
+                            + "values(" + maPhim + ", " + maUser + ", " + maRap + ", " + maGhe + ", '" + ngayDatDateTime.format(formatter) + "', '" + ngayXemDatetime.format(formatter) + "', " + giaVe + ", '" + thanhToan + "')");
+                    Toast.makeText(DatVe.this, "Bạn đã thêm 1 vé phim", Toast.LENGTH_SHORT).show();
+
+                } catch (Exception e) {
+                    Toast.makeText(DatVe.this, "Có lỗi  " + e, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DatVe.this, "Bạn chưa nhập đủ thông tin  " + e, Toast.LENGTH_SHORT).show();
+                }
+                // 7.ngay Dat
+
             }
         });
-
+        // NUT CART
+        ibtnCartDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCartDialog();
+            }
+        });
     }
 
 
@@ -152,26 +177,38 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
 
         customDialog.show();
     }
+    private void showCartDialog() {
+        ListCartDialog customDialog = new ListCartDialog(this, this);
 
+
+        customDialog.show();
+    }
     public void showGheDialog(Rap dataFromDialogRAP) {
-        ListGheDialog customDialog = new ListGheDialog(this, rapShowGhe, this);
+        ListGheDialog customDialog = new ListGheDialog(this, dataFromDialogRAP, this);
 
 
         customDialog.show();
     }
 
     private void showNgayXemDateTimePicker() {
-        DateTimePickerActivity customDialog = new DateTimePickerActivity(this, dateTimeString, this);
+        DateTimePickerDialog customDialog = new DateTimePickerDialog(this, dateTimeString, this);
 
 
         customDialog.show();
     }
-
     @Override
-    public void onDialogNgayXemDismissed(String dateTimeNgayXem) {
+    public void onDialogListCartDismissed() {
         // Gọi hàm sau khi dialog Rap đã được đóng
 
-        dateTimeString = dateTimeNgayXem;
+
+
+    }
+
+    @Override
+    public void onDialogNgayXemDismissed(LocalDateTime dateTimeNgayXem) {
+        // Gọi hàm sau khi dialog Rap đã được đóng
+
+        dateTimeString = dateTimeNgayXem.toString();
         btnDateTimePickerTgXemPage.setText(dateTimeString);
 
     }
@@ -185,56 +222,10 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
     }
 
     @Override
-    public void onDialogListGheDismissed() {
+    public void onDialogListGheDismissed(Ghe gheChon) {
+        btnChonGhe.setText(gheChon.getTenGhe());
         // Gọi hàm sau khi dialog Ghe đã được đóng
     }
-//    private void showGheDialog(Rap rap) {
-//        // Tạo đối tượng Dialog và gán layout
-//        Dialog dialog = new Dialog(this);
-//        dialog.setContentView(R.layout.dialog_ghe);
-//
-//        // Lấy các thành phần trong layout của dialog
-////        TextView dialogText = dialog.findViewById(R.id.dialog_text);
-//        Button closeButton = dialog.findViewById(R.id.dialog_button);
-//        gvlistRapDatVe = dialog.findViewById(R.id.gvListRapDatVe);
-//        // Đặt nội dung và hành động cho các thành phần
-////        dialogText.setText("Đây là nội dung của dialog");
-//
-//        gheDao = new GheDao();
-//        listGhe = gheDao.getGheByRap(rap);
-//
-//
-//        // Tạo một Adapter để kết nối dữ liệu và Spinner
-//
-//        gheAdapter = new GheAdapter(this, R.layout.activity_item_ghe, listGhe);
-//
-//        // Định dạng giao diện cho Spinner khi đổ xuống
-////        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        // Đặt Adapter cho Spinner
-//        gvlistGheDatVe.setAdapter(gheAdapter);
-//        gvlistGheDatVe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-////
-////                Rap  rap = listRap.get(position);
-////                btnChonRap.setText(rap.getTenRap());
-//                Toast.makeText(DatVe.this, "Rap " + listGhe.get(position).getTenGhe(), Toast.LENGTH_SHORT).show();
-//                dialog.dismiss();
-//
-//            }
-//        });
-//
-//        closeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dialog.dismiss(); // Đóng dialog khi nhấn nút
-//            }
-//        });
-//
-//        // Hiển thị dialog
-//        dialog.show();
-//    }
+
 }
 

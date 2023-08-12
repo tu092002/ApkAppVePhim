@@ -9,12 +9,8 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.nht.apktestapp.Adapters.GheAdapter;
 import com.nht.apktestapp.Adapters.RapAdapter;
-import com.nht.apktestapp.Dao.GheDao;
-import com.nht.apktestapp.Dao.PhimDao;
 import com.nht.apktestapp.Dao.RapDao;
-import com.nht.apktestapp.Model.Ghe;
 import com.nht.apktestapp.Model.Phim;
 import com.nht.apktestapp.Model.Rap;
 
@@ -23,21 +19,17 @@ import java.util.List;
 
 public class ListRapDialog extends Dialog {
     TextView tvTenPhimDatVe, tvGiaPhimDatVe;
+    Button btnChonRap;
+
     List<Phim> list = new ArrayList<>();
     List<Rap> listRap = new ArrayList<>();
-    List<Ghe> listGhe = new ArrayList<>();
     List<String> listTenRap = new ArrayList<>();
-    PhimDao phimDao;
     RapDao rapDao;
-    GheDao gheDao;
-    Button btnChonRap;
     RapAdapter rapAdapter;
-    GheAdapter gheAdapter;
     GridView gvlistRapDatVe;
-    GridView gvlistGheDatVe;
     boolean[] flag = {false};
     public static int indexRapChon = 1;
-    Rap rapShowGhe;
+    Rap rapShowGhe = new Rap();
     private OnDialogDismissListener callback;
 
     public ListRapDialog(Context context, Rap dataToPassRap, OnDialogDismissListener callback) {
