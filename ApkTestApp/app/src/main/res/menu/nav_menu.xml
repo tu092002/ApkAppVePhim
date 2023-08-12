@@ -22,6 +22,10 @@
             android:id="@+id/btnDangKyPage"
             android:icon="@drawable/baseline_info_24"
             android:title="DangKy"/>
+        <item
+            android:id="@+id/btnThongKe"
+            android:icon="@drawable/baseline_pie_chart_24"
+            android:title="Thống kê"/>
     </group>
     <item
         android:title="">

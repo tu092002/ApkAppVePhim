@@ -63,26 +63,32 @@ public  class PhimDao {
             p.setMaPhim(c.getInt(0));
             p.setTenPhim(c.getString(1));
             p.setMoTa(c.getString(2));
-
-
-
             p.setImgPhim(c.getBlob(3));
-
             p.setGiaPhim(c.getDouble(4));
-
             // Chuyển đối tượng thành chuỗi
             ls.add(p);
-
             c.moveToNext();
-
         }
         c.close();
-
         Collections.reverse(ls);// phim mới thêm sẽ hiện ở đầu tiên
-
-
         return ls;
     }
+//    public List<String> getImagePhim(){
+//        List<String> list = new ArrayList<>();
+//        // Tạo con trỏ đọc bảng dữ liệu phim
+//        Cursor c = MainActivity.sqLiteDatabase.query("Phim", null, null, null, null, null, null);
+//        c.moveToFirst();/// Di chuyển con trỏ về bản ghi đầu tiên
+//        // đọc
+//        while (c.isAfterLast() == false) //  trong khi không phải dòng cuối thì vẫn đoọc
+//        {
+//            Phim p  = new Phim();
+//            list.add(p.getImgPhim().toString());
+//            c.moveToNext();
+//        }
+//        c.close();
+//        Collections.reverse(list);// phim mới thêm sẽ hiện ở đầu tiên
+//        return list;
+//    }
     // 3. Sửa
     public int  UpdatePhim(Phim u) {
         ContentValues values = new ContentValues();// Tạo đối tượng thêm dứ liệu

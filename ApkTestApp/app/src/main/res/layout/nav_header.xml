@@ -10,24 +10,26 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/aklogo"
-        android:id="@+id/imgAvtMainAct"/>
+        android:id="@+id/imgAvtMainAct"
+        android:layout_width="106dp"
+        android:layout_height="101dp"
+        android:src="@drawable/ic_movie" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Android Knowledge"
+        android:text=""
         android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:id="@+id/tvUserNameHeader"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="contact@androidknowledge.com"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="14sp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:id="@+id/tvHoTenHeader"/>
 
 </LinearLayout>

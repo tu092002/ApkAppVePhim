@@ -86,7 +86,7 @@
                 android:id="@+id/imgAvt"
                 android:layout_width="180dp"
                 android:layout_height="129dp"
-                android:src="@drawable/baseline_image_24" />
+                android:src="@drawable/imgempty" />
 
             <ImageView
                 android:id="@+id/ibtnUpAvt"
