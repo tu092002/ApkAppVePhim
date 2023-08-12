@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tệp: res/layout/list_item_layout.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="left|center"
+    android:longClickable="true">
+
+    <TextView
+        android:id="@+id/tvMaVeCartLv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="hello"
+        android:textStyle="bold"
+        android:textColor="#03A9F4"
+        />
+
+    <TextView
+        android:id="@+id/tvGiaVeCartLv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30000"
+        android:textSize="12sp"/>
+    <TextView
+        android:id="@+id/tvThanhToanCartLv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#009688"
+        android:textStyle="bold"
+        android:text="Đã thanh toán"
+        android:textSize="12sp"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_close_24"
+        android:id="@+id/ibtnXoaVeCartLv"
+        android:layout_gravity="end"/>
+</LinearLayout>

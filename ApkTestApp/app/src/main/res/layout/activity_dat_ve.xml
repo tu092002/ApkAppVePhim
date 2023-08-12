@@ -6,14 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".DatVe"
     android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#fff"
 
+        >
 
-    <ImageView
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_shopping_cart_24"
+            android:id="@+id/ibtnCartDialog"
+            />
 
-        android:layout_width="150dp"
-        android:layout_height="72dp"
-        android:layout_gravity="right|top"
-        android:src="@drawable/baseline_shopping_cart_24"/>
+        <TextView
+            android:id="@+id/tvBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/ibtnCartDialog"
+            android:layout_alignEnd="@id/ibtnCartDialog"
+            android:text="5"
+            android:background="#03A9F4"
+            android:textColor="#FFFFFF"
+            android:padding="4dp" />
+
+    </RelativeLayout>
+
 
     <TextView
         android:layout_width="wrap_content"

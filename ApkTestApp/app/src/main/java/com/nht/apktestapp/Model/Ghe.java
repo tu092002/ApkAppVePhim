@@ -7,7 +7,7 @@ public class Ghe {
     private String tenGhe;
 
 
-    private int empty;
+    private String empty;
 
 
     public Ghe() {
@@ -37,11 +37,11 @@ public class Ghe {
         this.maGhe = maGhe;
     }
 
-    public int getEmpty() {
+    public String getEmpty() {
         return empty;
     }
 
-    public void setEmpty(int empty) {
+    public void setEmpty(String empty) {
         this.empty = empty;
     }
 }
