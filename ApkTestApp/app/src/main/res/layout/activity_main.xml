@@ -16,13 +16,67 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
+            app:title=" "
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:id="@+id/toolbar"
             android:elevation="4dp"
             android:background="@color/lavender"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            >
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"/>
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_action_search"
+                    android:id="@+id/ibtnSearchPhim"/>
+
+            </LinearLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+
+                >
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_shopping_cart_24"
+                    android:background="@color/lavender"
+                    android:id="@+id/ibtnCartDialog"
+                    android:paddingBottom="0sp"
+                    />
+                <TextView
+                    android:id="@+id/tvBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="5"
+                    android:textSize="15sp"
+                    android:width="10sp"
+                    android:layout_below="@+id/ibtnCartDialog"
+                    android:background="#F44336"
+                    android:layout_centerInParent="true"
+                    android:textColor="#EAE1E1"
+                    />
+
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
         <ViewFlipper
             android:id="@+id/viewFlipper"
             android:layout_width="match_parent"
