@@ -1,5 +1,6 @@
 package com.nht.apktestapp;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -27,16 +30,17 @@ import com.nht.apktestapp.Adapters.PhimAdapter;
 import com.nht.apktestapp.Admin.AdminPhim;
 import com.nht.apktestapp.Admin.AdminRap;
 import com.nht.apktestapp.Dao.PhimDao;
+import com.nht.apktestapp.Dao.VeDao;
+import com.nht.apktestapp.Model.Ghe;
 import com.nht.apktestapp.Model.Phim;
+import com.nht.apktestapp.Model.Rap;
+import com.nht.apktestapp.Model.Ve;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements OnDialogDismissListener, NavigationView.OnNavigationItemSelectedListener {
 
     private ViewFlipper viewFlipper;
     private List<String> imageUrls;
@@ -53,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
 
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 // Tạo database
         database = new Database(this, "film.sqlite", null, 1);
         sqLiteDatabase = database.getWritableDatabase(); // cái này cho phép ghi dữ liệu database
+// có sqLiteDatabase mới dùng hàm đc Giỏ hàng number
 
+        badgeNumber();
         // tạo hình avt
 //        imgAvtMainAct = (ImageView) findViewById(R.id.imgAvtMainAct);
 //        User user = MainActivity.database.GetData("SELECT * FROM User WHERE active = 1")
@@ -111,6 +116,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            startActivity(new Intent(MainActivity.this, HeaderActivity.class));
 //        }
 //    });
+        ImageButton ibtnCartDialog = (ImageButton) findViewById(R.id.ibtnCartDialog);
+        ibtnCartDialog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCartDialog();
+            }
+        });
+
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav,
                 R.string.close_nav);
@@ -128,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        ImageView imgv5 = (ImageView) findViewById(R.id.imgv5);
 
         //list chứa danh sách phim
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
             // Lấy tham chiếu đến ImageView và gắn hình ảnh cho nó
             ImageView imageView = findViewById(getResources().getIdentifier("imgv" + (i+1), "id", getPackageName()));
 //            imageView.setImageResource(list.get(i).getImgPhim());
@@ -142,7 +155,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
    }
-
+    public  void badgeNumber(){
+        VeDao veDao = new VeDao();
+        List<Ve>  listCart  = veDao.getListCartOrVe();
+       TextView tvBadge = (TextView) findViewById(R.id.tvBadge);
+        tvBadge.setText(Integer.toString(listCart.size()));
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
@@ -175,4 +193,38 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
+
+    @Override
+    public void onDialogListRapDismissed(Rap rapShowGhe) {
+
+    }
+    @Override
+    public void onDialogListCartDismissed() {
+        recreate();
+    }
+    private void showCartDialog() {
+        ListCartDialog customDialog = new ListCartDialog(this, this);
+
+
+        customDialog.show();
+    }
+
+    @Override
+    public void onDialogListGheDismissed(Ghe gheChon) {
+
+    }
+
+    @Override
+    public void onDialogNgayXemDismissed(LocalDateTime dateTimeNgayXem) {
+
+    }
+
+
+//
+//    @Override
+//    public void onPointerCaptureChanged(boolean hasCapture) {
+//        super.onPointerCaptureChanged(hasCapture);
+//    }
+//    //
+
 }

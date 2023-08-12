@@ -18,6 +18,8 @@ import com.nht.apktestapp.Adapters.VeAdapter;
 import com.nht.apktestapp.Dao.VeDao;
 import com.nht.apktestapp.Model.Ve;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,32 +59,44 @@ public class ListCartDialog extends Dialog {
         lvCart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), "Vé "+ position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Vé #"+ listVe.get(position).getMaVe(), Toast.LENGTH_SHORT).show();
 
+                LocalDateTime currentDateTime = LocalDateTime.now();
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setTitle("XÁC NHẬN");
-                dialog.setMessage("Bạn có đồng ý xóa không ? ");
-                dialog.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                LocalDateTime nowPlus15Minutes = LocalDateTime.now();
+
+                Duration duration = Duration.between(currentDateTime, listVe.get(position).getNgayDat());
+
+                long minutes = duration.toMinutes();
+
+                if (minutes > 1) {
+                    Toast.makeText(getContext(), " quá giới hạn 1 phút không được hủy.", Toast.LENGTH_SHORT).show();
+                } else {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                    dialog.setTitle("XÁC NHẬN");
+                    dialog.setMessage("Bạn có đồng ý xóa không ? ");
+                    dialog.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 //                        MainActivity.sqLiteDatabase.rawQuery("DELETE  FROM Ve WHERE MaVe = ? ",
 //                                new String[]{Integer.toString(listVe.get(position).getMaVe())});
-                        veDao.DeleteVe(listVe.get(position).getMaVe());
-                        listVe.remove(position);
+                            veDao.DeleteVe(listVe.get(position).getMaVe());
+                            listVe.remove(position);
 
+                            Toast.makeText(getContext(), "xóa thành công", Toast.LENGTH_SHORT).show();
+                            veAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    dialog.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog alertDialog = dialog.create();
+                    alertDialog.show();
+                }
 
-                        veAdapter.notifyDataSetChanged();
-                    }
-                });
-                dialog.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog alertDialog = dialog.create();
-                alertDialog.show();
                 return false;
             }
         });
