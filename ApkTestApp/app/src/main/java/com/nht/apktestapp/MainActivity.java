@@ -119,19 +119,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
-        setSupportActionBar(toolbar);
-
-        drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav,
-                R.string.close_nav);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-
 
         //Khu vực khai báo, tạo viewFlipper
 //        ImageView imgv1 = (ImageView) findViewById(R.id.imgv1);

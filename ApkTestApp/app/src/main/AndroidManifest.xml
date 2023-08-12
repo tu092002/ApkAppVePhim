@@ -20,10 +20,11 @@
             android:exported="false" />
         <activity
             android:name=".HeaderActivity"
-
-            android:name=".itemCart"
-
             android:exported="false" />
+        <activity
+            android:name=".itemCart"
+            android:exported="false" />
+            />
         <activity
             android:name=".DateTimePickerDialog"
             android:exported="false" />
