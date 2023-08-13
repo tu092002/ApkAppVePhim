@@ -121,11 +121,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         //Khu vực khai báo, tạo viewFlipper
-//        ImageView imgv1 = (ImageView) findViewById(R.id.imgv1);
-//        ImageView imgv2 = (ImageView) findViewById(R.id.imgv2);
-//        ImageView imgv3 = (ImageView) findViewById(R.id.imgv3);
-//        ImageView imgv4 = (ImageView) findViewById(R.id.imgv4);
-//        ImageView imgv5 = (ImageView) findViewById(R.id.imgv5);
 
         //list chứa danh sách phim
         for (int i = 0; i < 5; i++) {
@@ -160,6 +155,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // Xử lý logout nếu cần thiết
         }  else if (itemId == R.id.btnThongKe) {
             startActivity(new Intent(this, ChartActivity.class));
+            // Xử lý logout nếu cần thiết
+        } else if (itemId == R.id.btnInfoUser) {
+            startActivity(new Intent(this, HeaderActivity.class));
             // Xử lý logout nếu cần thiết
         }
 
