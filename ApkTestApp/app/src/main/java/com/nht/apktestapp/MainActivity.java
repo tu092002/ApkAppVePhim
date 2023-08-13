@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +26,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.nht.apktestapp.Adapters.PhimAdapter;
 import com.nht.apktestapp.Admin.AdminPhim;
@@ -134,8 +136,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
 
         //Khu vực khai báo, tạo viewFlipper
-
-        //list chứa danh sách phim
         for (int i = 0; i < 2; i++) {
             // Lấy tham chiếu đến ImageView và gắn hình ảnh cho nó
             ImageView imageView = findViewById(getResources().getIdentifier("imgv" + (i+1), "id", getPackageName()));
@@ -148,6 +148,46 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
             imageView.setImageBitmap(bitmap);
         }
 
+        //Khai báo xử lí sự kiện bottom navigation view
+        BottomNavigationView navView = findViewById(R.id.botNaView);
+        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                if (itemId == R.id.actionHome) {
+                    Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else if (itemId == R.id.actionHistory) {
+                    Toast.makeText(MainActivity.this, "History", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else if (itemId == R.id.actionSearch) {
+                    Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else if (itemId == R.id.actionMe) {
+                    Toast.makeText(MainActivity.this, "me", Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                return false;
+//                switch (item.getItemId()) {
+//                    case R.id.actionHome:
+//                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+//                        return true;
+//                    case R.id.actionHistory:
+//                        Toast.makeText(MainActivity.this, "His", Toast.LENGTH_SHORT).show();
+//
+//                        return true;
+//                    case R.id.actionSearch:
+//                        Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
+//
+//                        return true;
+//                    case R.id.actionMe:
+//                        Toast.makeText(MainActivity.this, "me", Toast.LENGTH_SHORT).show();
+//                        return true;
+//                    default:
+//                        return false;
+//                }
+            }
+        });
 
    }
     public  void badgeNumber(){
