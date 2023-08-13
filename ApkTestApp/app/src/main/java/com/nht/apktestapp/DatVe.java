@@ -50,7 +50,7 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
     Rap rapShowGhe;
     Ve veDat;
     Ghe  gheChon;
-
+    public static LocalDateTime limitedDateTime;
     VeDao veDao;
     VeAdapter  veAdapter;
 
@@ -59,7 +59,6 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dat_ve);
         // anhs xa và khởi tạo
-        tvBadge = (TextView) findViewById(R.id.tvBadge);
         tvTenPhimDatVe = (TextView) findViewById(R.id.tvTenPhimDatVe);
         tvGiaPhimDatVe = (TextView) findViewById(R.id.tvGiaPhimDatVe);
         btnDateTimePickerTgXemPage = (Button) findViewById(R.id.btnDateTimePickerTgXemPage);
@@ -78,10 +77,7 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
         btnChonRap = (Button) findViewById(R.id.btnChonRap);
         tvTenPhimDatVe.setText(phim.getTenPhim());
         tvGiaPhimDatVe.setText(Double.toString(phim.getGiaPhim()));
-        veDao = new VeDao();
-        List<Ve>  listCart  = veDao.getListCartOrVe();
-
-        tvBadge.setText(Integer.toString(listCart.size()));
+        badgeNumber();
 
         // Tạo một danh sách các mục
 
@@ -153,6 +149,9 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
                             + "values(" + maPhim + ", " + maUser + ", " + maRap + ", " + maGhe + ", '" + ngayDatDateTime.format(formatter) + "', '" + ngayXemDatetime.format(formatter) + "', " + giaVe + ", '" + thanhToan + "')");
                     Toast.makeText(DatVe.this, "Bạn đã thêm 1 vé phim", Toast.LENGTH_SHORT).show();
 
+                    LocalDateTime currentDateTime = LocalDateTime.now();
+                   limitedDateTime = currentDateTime.plusMinutes(1);
+
                 } catch (Exception e) {
                     Toast.makeText(DatVe.this, "Có lỗi  " + e, Toast.LENGTH_SHORT).show();
                     Toast.makeText(DatVe.this, "Bạn chưa nhập đủ thông tin  " + e, Toast.LENGTH_SHORT).show();
@@ -170,19 +169,20 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
         });
     }
 
+    public  void badgeNumber (){
 
+        VeDao veDao = new VeDao();
+        List<Ve>  listCart  = veDao.getListCartOrVe();
+        tvBadge = (TextView) findViewById(R.id.tvBadge);
+        tvBadge.setText(Integer.toString(listCart.size()));
+    }
     private void showRapDialog() {
         ListRapDialog customDialog = new ListRapDialog(this, rapShowGhe, this);
 
 
         customDialog.show();
     }
-    private void showCartDialog() {
-        ListCartDialog customDialog = new ListCartDialog(this, this);
 
-
-        customDialog.show();
-    }
     public void showGheDialog(Rap dataFromDialogRAP) {
         ListGheDialog customDialog = new ListGheDialog(this, dataFromDialogRAP, this);
 
@@ -196,11 +196,17 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
 
         customDialog.show();
     }
+    private void showCartDialog() {
+        ListCartDialog customDialog = new ListCartDialog(this, this);
+
+
+        customDialog.show();
+    }
     @Override
     public void onDialogListCartDismissed() {
         // Gọi hàm sau khi dialog Rap đã được đóng
 
-
+        recreate();
 
     }
 
