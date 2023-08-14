@@ -5,15 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.nht.apktestapp.Database;
 import com.nht.apktestapp.MainActivity;
 import com.nht.apktestapp.Model.Phim;
-import com.nht.apktestapp.Database;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public  class PhimDao {
+public class PhimDao {
 
     private SQLiteDatabase db;
     private Database dbHelper;
@@ -30,6 +30,44 @@ public  class PhimDao {
 
     }
 
+    public String getTenPhimById(int id) {
+        String tenPhim = "";
+        Cursor c = MainActivity.database.GetData("SELECT * FROM Phim Where MaPhim = '" + id + "' LIMIT 1");
+        c.moveToFirst();
+        tenPhim = c.getString(1);
+        c.close();
+        return tenPhim;
+    }
+
+    public byte[] getImgPhimById(int id) {
+        byte[] imgPhim = null;
+        Cursor c = MainActivity.database.GetData("SELECT * FROM Phim Where MaPhim = '" + id + "' LIMIT 1 ");
+        c.moveToFirst();
+        int indexOfImgPhim =  c.getColumnIndex("ImgPhim");
+        imgPhim =  c.getBlob(indexOfImgPhim);
+        c.close();
+        return imgPhim;
+    }
+
+    public List<Phim> getListPhimByKeyWord(String keyWord) {
+        List<Phim> listPhimBykeyword = new ArrayList<>();
+        Cursor c = MainActivity.database.GetData("SELECT * FROM Phim WHERE TenPhim LIKE '%" + keyWord + "%'");
+        listPhimBykeyword.clear();
+        c.moveToFirst();
+        while (c.isAfterLast() == false) {
+            Phim p = new Phim();
+            p.setMaPhim(c.getInt(0));
+            p.setTenPhim(c.getString(1));
+            p.setMoTa(c.getString(2));
+            p.setImgPhim(c.getBlob(3));
+            p.setGiaPhim(c.getDouble(4));
+            listPhimBykeyword.add(p);
+            c.moveToNext();
+        }
+        c.close();
+
+        return listPhimBykeyword;
+    }
 
     public int InsertPhim(Phim u) {
         ContentValues values = new ContentValues();// Tạo đối tượng thêm dứ liệu
@@ -73,7 +111,8 @@ public  class PhimDao {
         Collections.reverse(ls);// phim mới thêm sẽ hiện ở đầu tiên
         return ls;
     }
-//    public List<String> getImagePhim(){
+
+    //    public List<String> getImagePhim(){
 //        List<String> list = new ArrayList<>();
 //        // Tạo con trỏ đọc bảng dữ liệu phim
 //        Cursor c = MainActivity.sqLiteDatabase.query("Phim", null, null, null, null, null, null);
@@ -90,7 +129,7 @@ public  class PhimDao {
 //        return list;
 //    }
     // 3. Sửa
-    public int  UpdatePhim(Phim u) {
+    public int UpdatePhim(Phim u) {
         ContentValues values = new ContentValues();// Tạo đối tượng thêm dứ liệu
         //đưa dữ liệu vào đói tượng chứa
 //        values.put("maPhim", u.getMaPhim()); // tự tăng nên ko thêm
@@ -100,7 +139,7 @@ public  class PhimDao {
         values.put("ImgPhim", u.getImgPhim());
         // thực thi update
 
-        long kq = MainActivity.sqLiteDatabase.update("Phim",values,"MaPhim=?", new String[]{Integer.toString(u.getMaPhim())} );
+        long kq = MainActivity.sqLiteDatabase.update("Phim", values, "MaPhim=?", new String[]{Integer.toString(u.getMaPhim())});
         if (kq <= 0) {
             return -1; // UPdate thát bại
         }
@@ -109,8 +148,8 @@ public  class PhimDao {
     }
 
     //4. Xóa
-    public int DeletePhim(int MaPhim){
-        int kq = MainActivity.sqLiteDatabase.delete("Phim", "MaPhim=?",  new String[]{""+ MaPhim + ""});
+    public int DeletePhim(int MaPhim) {
+        int kq = MainActivity.sqLiteDatabase.delete("Phim", "MaPhim=?", new String[]{"" + MaPhim + ""});
         if (kq <= 0) {
             return -1; // Xóa thát bại
         }

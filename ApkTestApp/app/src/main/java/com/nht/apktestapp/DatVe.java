@@ -115,7 +115,7 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
                 // 2. Mã phim
                 int maPhim = phim.getMaPhim();
                 //3. Mã User
-                int maUser = 1;
+                int maUser = dangNhap.currentUser.getMaUser();
 
                 //4. Ma Rap
                 listRap = rapDao.getAllRapToString();

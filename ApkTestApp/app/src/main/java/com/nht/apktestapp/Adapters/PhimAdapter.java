@@ -67,7 +67,7 @@ public class PhimAdapter extends BaseAdapter {
         viewHolder.tvGiaPhimGv.setText(Double.toString(arrayList.get(position).getGiaPhim()));
 //        viewHolder.imgPhimGv.setImageResource(arrayList.get(position).getImgPhim());
 
-        // chuyển byte[] => bitmap
+        // chuyển byte[] => ảnh giao diện bitmap
         byte[] hinhAnh =  phim.getImgPhim();
         Bitmap bitmap = BitmapFactory.decodeByteArray(hinhAnh, 0, hinhAnh.length);
         viewHolder.imgPhimGv.setImageBitmap(bitmap);

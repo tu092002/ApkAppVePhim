@@ -5,9 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.nht.apktestapp.MainActivity;
-import com.nht.apktestapp.Model.Phim;
 import com.nht.apktestapp.Database;
+import com.nht.apktestapp.MainActivity;
 import com.nht.apktestapp.Model.Rap;
 
 import java.util.ArrayList;
@@ -78,6 +77,14 @@ public  class RapDao {
 
 
         return ls;
+    }
+    public String getTenRapById(int id){
+        String tenRap = "";
+        Cursor c = MainActivity.database.GetData("SELECT * FROM Rap Where MaRap = '"+ id +"' LIMIT 1");
+        c.moveToFirst();
+        tenRap = c.getString(1);
+
+        return tenRap;
     }
     // 3. Sửa
     public  int  UpdateRap(Rap u) {

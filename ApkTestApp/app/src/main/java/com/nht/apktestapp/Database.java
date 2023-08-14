@@ -267,10 +267,10 @@ public class Database extends SQLiteOpenHelper {
 
     public User GetUserByUsername(String username, String password) {
         SQLiteDatabase database = getReadableDatabase();
-        User user = null;
+        User user = new User();
 
-        String selectQuery = "SELECT * FROM " + TB_User + " WHERE " + TB_User_UserName + " = " + username + " AND "
-                + TB_User_Password + " = " + password;
+        String selectQuery = "SELECT * FROM " + TB_User + " WHERE " + TB_User_UserName + " = '" + username + "' AND "
+                + TB_User_Password + " = '" + password+ "'";
         Cursor cursor = MainActivity.database.GetData(selectQuery);
 
         if (cursor != null && cursor.moveToFirst()) {
