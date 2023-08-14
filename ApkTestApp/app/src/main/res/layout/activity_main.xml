@@ -16,7 +16,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            app:title=" "
+            app:title=""
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:id="@+id/toolbar"
@@ -80,6 +80,14 @@
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:text="Giới thiệu phim:"
+            ></TextView>
         <ViewFlipper
             android:id="@+id/viewFlipper"
             android:layout_width="match_parent"
@@ -128,35 +136,42 @@
 
         </ViewFlipper>
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/fragment_container">
-
+            android:id="@+id/fragment_container"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:text="Phim mới: "
+                ></TextView>
             <GridView
                 android:id="@+id/gvListPhimMain"
                 android:layout_width="match_parent"
-                android:layout_height="405dp"
+                android:layout_height="420dp"
                 android:background="#333"
                 android:gravity="center"
                 android:horizontalSpacing="5dp"
-                android:numColumns="2"
-                android:verticalSpacing="@android:dimen/app_icon_size"
+                android:numColumns="2"/>
+<!--                android:verticalSpacing="@android:dimen/app_icon_size"-->
 
 
-                />
+            
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/botNaView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:background="#4FBED1"
+                android:background="@color/lavender"
                 app:itemIconTint="@color/bottom_nav_menu"
                 app:itemTextColor="@color/bottom_nav_menu"
                 app:menu="@menu/bottom_nav_menu" />
 
-        </FrameLayout>
+        </LinearLayout>
 
 
 

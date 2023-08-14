@@ -50,16 +50,14 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvMoTaGv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:maxLines="@integer/material_motion_duration_medium_2"
         android:text="Mô tả phimccddddddddddddddddddddddddddddddddddddddddđ"
         android:textColor="#fff"
-        android:textStyle="italic"
         android:textSize="20dp"
-        android:maxLines="@integer/material_motion_duration_medium_2"
-        android:id="@+id/tvMoTaGv"/>
+        android:textStyle="italic" />
 
 
-
-
-  </LinearLayout>
+</LinearLayout>

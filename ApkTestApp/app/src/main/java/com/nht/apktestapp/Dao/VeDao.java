@@ -19,6 +19,7 @@ import java.util.List;
 public class VeDao {
 
 
+
     private SQLiteDatabase db;
     private Database dbHelper;
     private Context context;
@@ -111,6 +112,9 @@ public class VeDao {
         }
         return 1;
     }
+
+
+
 
 }
 
