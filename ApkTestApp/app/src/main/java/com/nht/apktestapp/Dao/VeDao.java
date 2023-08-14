@@ -68,6 +68,30 @@ public class VeDao {
         return 1;
 
     }
+    public List<Ve>  getListCartByUser(int userId){
+        List<Ve>  listVe = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+        Cursor c = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM Ve WHERE MaUser = ?", new String[] {Integer.toString(userId)});
+        c.moveToFirst();
+        while(c.isAfterLast() ==  false) {
+
+            Ve p = new Ve();
+            p.setMaVe(c.getInt(0));
+            p.setMaPhim(c.getInt(1));
+            p.setMaUser(c.getInt(2));
+            p.setMaRap(c.getInt(3));
+            p.setMaGhe(c.getInt(4));
+            p.setNgayDat(LocalDateTime.parse(c.getString(5),formatter));
+            p.setNgayXem(LocalDateTime.parse(c.getString(6),formatter));
+            p.setGiaVe(c.getDouble(7));
+            p.setThanhToan(c.getString(8));
+            listVe.add(p);
+            c.moveToNext();
+        }
+
+        return listVe;
+    }
     public List<Ve> getListCartOrVe(){
         List<Ve>  ls =  new ArrayList<>();
         // Tạo con trỏ đọc bảng dữ liệu phim
