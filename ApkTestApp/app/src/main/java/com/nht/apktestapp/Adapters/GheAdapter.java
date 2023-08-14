@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nht.apktestapp.Model.Ghe;
@@ -32,7 +33,7 @@ public class GheAdapter extends BaseAdapter {
     private class ViewHolder {
         TextView tvTenGheGv;
         TextView tvEmptyGv;
-//        ImageView imgGheGv; // ảnh hiển thị trong grid vỉew
+        ImageView imgGheGv; // ảnh hiển thị trong grid vỉew
     }
 
     @Override
@@ -45,9 +46,10 @@ public class GheAdapter extends BaseAdapter {
             viewHolder  = new ViewHolder();
 
             //ánh xạ
+
+            viewHolder.imgGheGv = (ImageView) convertView.findViewById(R.id.imgGheGv);
             viewHolder.tvTenGheGv = (TextView) convertView.findViewById(R.id.tvTenGheGv);
             viewHolder.tvEmptyGv = (TextView) convertView.findViewById(R.id.tvEmptyGv);
-//            viewHolder.imgGheGv = (ImageView) convertView.findViewById(R.id.imgGheGv);
 
             convertView.setTag(viewHolder);
 
@@ -56,7 +58,17 @@ public class GheAdapter extends BaseAdapter {
             viewHolder = (ViewHolder)  convertView.getTag();
         }
         Ghe ghe = arrayList.get(position);
-        //Gán giá trị
+        //Gán giá trịn
+//        GheDao gheDao = new GheDao();
+//        List<Ghe>  listGhe = gheDao.getGheByRap(DatVe.rapShowGhe);
+//
+//     Cursor c =  MainActivity.database.GetData("SELECT * FROM Ghe  WHERE TenGhe = '" + arrayList.get(position).getTenGhe() + "' LIMIT 1");
+//        c.moveToFirst();
+        if (ghe.getEmpty().equals("false") ) {
+                viewHolder.imgGheGv.setBackgroundResource(R.drawable.aklogo);
+        }
+
+
         viewHolder.tvTenGheGv.setText(arrayList.get(position).getTenGhe());
         viewHolder.tvEmptyGv.setText(arrayList.get(position).getEmpty());
 //        viewHolder.imgPhimGv.setImageResource(arrayList.get(position).getImgPhim());

@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatVe extends AppCompatActivity implements OnDialogDismissListener {
+    public static Rap rapShowGhe;
+    public static LocalDateTime limitedDateTime;
     TextView tvTenPhimDatVe, tvGiaPhimDatVe;
     List<Phim> list = new ArrayList<>();
     List<Rap> listRap;
@@ -49,12 +51,10 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
     GridView gvlistGheDatVe;
     boolean[] flag = {false};
     String dateTimeString;
-    Rap rapShowGhe;
     Ve veDat;
-    Ghe  gheChon;
-    public static LocalDateTime limitedDateTime;
+    Ghe gheChon;
     VeDao veDao;
-    VeAdapter  veAdapter;
+    VeAdapter veAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,8 +128,8 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
 //
                 // 5. Ma ghế
                 listGhe = gheDao.getGheByRap(rapShowGhe);
-                gheChon = listGhe.get(ListGheDialog.indexGheChon);
-
+                gheChon = ListGheDialog.gheChon;
+                MainActivity.database.Querydata("UPDATE Ghe SET Empty = 'false' WHERE MaGhe = " + gheChon.getMaGhe() + "");
                 int maGhe = gheChon.getMaGhe();
                 // 6. gia ve
                 double giaVe = phim.getGiaPhim();
@@ -152,7 +152,7 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
                     Toast.makeText(DatVe.this, "Bạn đã thêm 1 vé phim", Toast.LENGTH_SHORT).show();
 
                     LocalDateTime currentDateTime = LocalDateTime.now();
-                   limitedDateTime = currentDateTime.plusMinutes(1);
+                    limitedDateTime = currentDateTime.plusMinutes(1);
 
                 } catch (Exception e) {
                     Toast.makeText(DatVe.this, "Có lỗi  " + e, Toast.LENGTH_SHORT).show();
@@ -167,6 +167,7 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
             @Override
             public void onClick(View v) {
                 showCartDialog();
+                badgeNumber();
             }
         });
 
@@ -185,13 +186,17 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
 
     }
 
-    public  void badgeNumber (){
+    public void badgeNumber() {
+        if (dangNhap.currentUser != null) {
+            VeDao veDao = new VeDao();
+            List<Ve> listCart = veDao.getListCartByUser(dangNhap.currentUser.getMaUser());
+            TextView tvBadge = (TextView) findViewById(R.id.tvBadge);
+            tvBadge.setText(Integer.toString(listCart.size()));
+            tvBadge.invalidate();
+        }
 
-        VeDao veDao = new VeDao();
-        List<Ve>  listCart  = veDao.getListCartOrVe();
-        tvBadge = (TextView) findViewById(R.id.tvBadge);
-        tvBadge.setText(Integer.toString(listCart.size()));
     }
+
     private void showRapDialog() {
         ListRapDialog customDialog = new ListRapDialog(this, rapShowGhe, this);
 
@@ -212,18 +217,20 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
 
         customDialog.show();
     }
+
     private void showCartDialog() {
         ListCartDialog customDialog = new ListCartDialog(this, this);
 
 
         customDialog.show();
     }
+
     @Override
     public void onDialogListCartDismissed() {
         // Gọi hàm sau khi dialog Rap đã được đóng
 
-        recreate();
-
+//        recreate();
+        badgeNumber();
     }
 
     @Override
@@ -245,8 +252,24 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
 
     @Override
     public void onDialogListGheDismissed(Ghe gheChon) {
-        btnChonGhe.setText(gheChon.getTenGhe());
-        // Gọi hàm sau khi dialog Ghe đã được đóng
+        try{
+
+
+                btnChonGhe.setText(gheChon.getTenGhe());
+
+
+        }
+        catch
+        (Exception e){
+            Toast.makeText(this, "Lỗi " + e.toString(), Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+    @Override
+    public void onDialogListGheDismissed() {
+
     }
 
 }
