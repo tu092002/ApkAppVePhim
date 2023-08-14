@@ -57,6 +57,14 @@ public class GheDao {
 
         return ls;
     }
+    public String getTenGheById(int id){
+        String tenGhe = "";
+        Cursor c = MainActivity.database.GetData("SELECT * FROM Ghe Where MaGhe = '"+ id +"' LIMIT 1");
+        c.moveToFirst();
+        tenGhe = c.getString(2);
+
+        return tenGhe;
+    }
     public List<Ghe> getGheByRap(Rap rap ){
         List<Ghe> ls = new ArrayList<>();// Tao danh sách rỗng
         // Tạo con trỏ đọc bảng dữ liệu phim

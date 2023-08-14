@@ -1,7 +1,6 @@
 package com.nht.apktestapp;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,8 @@ public class dangNhap extends AppCompatActivity {
     EditText edtUsernameLogin, edtPasswordLogin;
     Button btnDangKyPage;
     Button btnDangNhap;
-    public static String username, password;
+    public static User currentUser  = null;
+    private  String username, password;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,8 +40,8 @@ public class dangNhap extends AppCompatActivity {
                         Toast.makeText(dangNhap.this, "Chưa nhập username hoặc password", Toast.LENGTH_SHORT).show();
                     else {
                         if (MainActivity.database.checkLogin(username, password) == true) {
-                            User userLogin = MainActivity.database.GetUserByUsername(username, password);
-                            Toast.makeText(dangNhap.this, "Chào mừng " + userLogin.getHoTen() + " quay trở lại!!!", Toast.LENGTH_SHORT).show();
+                             currentUser = MainActivity.database.GetUserByUsername(username, password);
+                            Toast.makeText(dangNhap.this, "Chào mừng " + dangNhap.currentUser.getHoTen() + " quay trở lại!!!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(dangNhap.this, MainActivity.class));
 
                         } else Toast.makeText(dangNhap.this, "Username hoặc Password sai!!!", Toast.LENGTH_SHORT).show();

@@ -68,7 +68,6 @@ public class VeDao {
         return 1;
 
     }
-
     public List<Ve> getListCartOrVe(){
         List<Ve>  ls =  new ArrayList<>();
         // Tạo con trỏ đọc bảng dữ liệu phim

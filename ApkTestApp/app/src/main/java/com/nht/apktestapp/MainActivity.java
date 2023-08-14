@@ -4,6 +4,7 @@ package com.nht.apktestapp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -44,18 +45,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnDialogDismissListener, NavigationView.OnNavigationItemSelectedListener {
 
-    private ViewFlipper viewFlipper;
-    private List<String> imageUrls;
-
-
     public static Database database;
     public static SQLiteDatabase sqLiteDatabase;
-    ImageView imgAvtMainAct;
+    TextView tvSearchPhim;
     PhimDao phimDao;
     PhimAdapter adapter;
     Context context;
     List<Phim> list = new ArrayList<>(); // tạo danh sách rỗng    PhimAdapter adapter;
     GridView gvListPhimMain;
+    private ViewFlipper viewFlipper;
+    private List<String> imageUrls;
     private DrawerLayout drawerLayout;
 
 
@@ -64,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // kiểm tra xem user đã đăng nhập chưa để hiển thị menu cho đúng
 
 
 // Tạo database
@@ -81,12 +81,14 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
         phimDao = new PhimDao();
 
+
 //         Hiển thị dữ liệu
         list.clear();// xóa hết nội dung trong list
         list = phimDao.getAllPhimToString();
         adapter = new PhimAdapter(context, R.layout.activity_item_phim, list);
         gvListPhimMain = (GridView) findViewById(R.id.gvListPhimMain);
         gvListPhimMain.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
         gvListPhimMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -103,7 +105,32 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
             }
 
         });
+        tvSearchPhim = (TextView) findViewById(R.id.tvSearchPhim);
+        ImageButton ibtnSearchPhim = (ImageButton) findViewById(R.id.ibtnSearchPhim);
+        ibtnSearchPhim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String keyWord = tvSearchPhim.getText().toString().trim();
+//                list = phimDao.getListPhimByKeyWord(keyWord);
+                Cursor c = MainActivity.database.GetData("SELECT * FROM Phim WHERE TenPhim LIKE '%" + keyWord + "%'");
+                list.clear();
+                c.moveToFirst();
+                while (c.isAfterLast() == false) {
+                    Phim p = new Phim();
+                    p.setMaPhim(c.getInt(0));
+                    p.setTenPhim(c.getString(1));
+                    p.setMoTa(c.getString(2));
+                    p.setImgPhim(c.getBlob(3));
+                    p.setGiaPhim(c.getDouble(4));
+                    list.add(p);
+                    c.moveToNext();
+                }
+                c.close();
+                adapter.notifyDataSetChanged();
 
+
+            }
+        });
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         setSupportActionBar(toolbar);
 
@@ -111,13 +138,50 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//    Toolbar toolbar1 = (Toolbar) findViewById(R.id.toolbar);
-//    toolbar1.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            startActivity(new Intent(MainActivity.this, HeaderActivity.class));
-//        }
-//    });
+        View headerView = navigationView.getHeaderView(0);
+
+        Menu menu = navigationView.getMenu();
+
+        if (dangNhap.currentUser != null) {
+
+            MenuItem btnDangNhapPage = menu.findItem(R.id.btnDangNhapPage);
+            btnDangNhapPage.setTitle("ĐĂNG XUẤT");
+            if ( !dangNhap.currentUser.getRole().equals("admin")) {
+                // cho phép quản trị hay ko ?
+                MenuItem btnAdminPhim = menu.findItem(R.id.btnAdminPhim);
+                MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
+                btnAdminPhim.setVisible(false);
+                btnAdminRap.setVisible(false);
+            }
+        } else if(dangNhap.currentUser == null)
+        {
+            // cho phép quản trị hay ko ?
+
+            MenuItem btnAdminPhim = menu.findItem(R.id.btnAdminPhim);
+            MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
+            btnAdminPhim.setVisible(false);
+            btnAdminRap.setVisible(false);
+        }
+
+
+
+        ImageView imgAvtHeader = (ImageView) headerView.findViewById(R.id.imgAvtHeader);
+        TextView tvUserNameHeader = (TextView) headerView.findViewById(R.id.tvUserNameHeader);
+        TextView tvHoTenHeader = (TextView) headerView.findViewById(R.id.tvHoTenHeader);
+        if (dangNhap.currentUser != null) {
+            // 2 cach lấy curent user, vì đã đặt public static User và cả 1 cái username bên dangNhap
+            tvUserNameHeader.setText(dangNhap.currentUser.getHoTen());
+            tvHoTenHeader.setText(dangNhap.currentUser.getUserName());
+
+
+            byte[] imgByteAvt = dangNhap.currentUser.getAvt(); // Lấy mảng byte của hình ảnh từ đối tượng phim
+            // Tạo đối tượng Bitmap từ mảng byte
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imgByteAvt, 0, imgByteAvt.length);
+            // Gắn hình ảnh vào ImageView
+            // Thay thế R.id.imageView bằng ID của ImageView của bạn
+            imgAvtHeader.setImageBitmap(bitmap);
+        }
+
         ImageButton ibtnCartDialog = (ImageButton) findViewById(R.id.ibtnCartDialog);
         ibtnCartDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,18 +197,16 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
         toggle.syncState();
 
 
-
-
         //Khu vực khai báo, tạo viewFlipper
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 5; i++) {
             // Lấy tham chiếu đến ImageView và gắn hình ảnh cho nó
-            ImageView imageView = findViewById(getResources().getIdentifier("imgv" + (i+1), "id", getPackageName()));
+            ImageView imageView = findViewById(getResources().getIdentifier("imgv" + (i + 1), "id", getPackageName()));
 //            imageView.setImageResource(list.get(i).getImgPhim());
             byte[] imgByte = list.get(i).getImgPhim(); // Lấy mảng byte của hình ảnh từ đối tượng phim
             // Tạo đối tượng Bitmap từ mảng byte
             Bitmap bitmap = BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length);
             // Gắn hình ảnh vào ImageView
-             // Thay thế R.id.imageView bằng ID của ImageView của bạn
+            // Thay thế R.id.imageView bằng ID của ImageView của bạn
             imageView.setImageBitmap(bitmap);
         }
 
@@ -168,50 +230,41 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
                     return true;
                 }
                 return false;
-//                switch (item.getItemId()) {
-//                    case R.id.actionHome:
-//                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
-//                        return true;
-//                    case R.id.actionHistory:
-//                        Toast.makeText(MainActivity.this, "His", Toast.LENGTH_SHORT).show();
-//
-//                        return true;
-//                    case R.id.actionSearch:
-//                        Toast.makeText(MainActivity.this, "Search", Toast.LENGTH_SHORT).show();
-//
-//                        return true;
-//                    case R.id.actionMe:
-//                        Toast.makeText(MainActivity.this, "me", Toast.LENGTH_SHORT).show();
-//                        return true;
-//                    default:
-//                        return false;
-//                }
+
             }
         });
 
-   }
-    public  void badgeNumber(){
+    }
+
+    public void badgeNumber() {
         VeDao veDao = new VeDao();
-        List<Ve>  listCart  = veDao.getListCartOrVe();
-       TextView tvBadge = (TextView) findViewById(R.id.tvBadge);
+        List<Ve> listCart = veDao.getListCartOrVe();
+        TextView tvBadge = (TextView) findViewById(R.id.tvBadge);
         tvBadge.setText(Integer.toString(listCart.size()));
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.btnAdminPhim) {
+
+        if (itemId == R.id.btnAdminPhim && dangNhap.currentUser.getRole().equals("admin")) {
             startActivity(new Intent(this, AdminPhim.class));
 
-        } else if (itemId == R.id.btnAdminRap) {
+        } else if (itemId == R.id.btnAdminRap && dangNhap.currentUser.getRole().equals("admin")) {
             startActivity(new Intent(this, AdminRap.class));
 
-        } else if (itemId == R.id.btnDangNhapPage) {
+        } else if (itemId == R.id.btnDangNhapPage && dangNhap.currentUser == null) {
             startActivity(new Intent(this, dangNhap.class));
+            // Xử lý logout nếu cần thiết
+        } else if (itemId == R.id.btnDangNhapPage && dangNhap.currentUser != null) {
+
+            dangNhap.currentUser = null;
+            recreate();
             // Xử lý logout nếu cần thiết
         } else if (itemId == R.id.btnDangKyPage) {
             startActivity(new Intent(this, dangKy.class));
             // Xử lý logout nếu cần thiết
-        }  else if (itemId == R.id.btnThongKe) {
+        } else if (itemId == R.id.btnThongKe) {
             startActivity(new Intent(this, ChartActivity.class));
             // Xử lý logout nếu cần thiết
         } else if (itemId == R.id.btnInfoUser) {
@@ -236,10 +289,12 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
     public void onDialogListRapDismissed(Rap rapShowGhe) {
 
     }
+
     @Override
     public void onDialogListCartDismissed() {
         recreate();
     }
+
     private void showCartDialog() {
         ListCartDialog customDialog = new ListCartDialog(this, this);
 

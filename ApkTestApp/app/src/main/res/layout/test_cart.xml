@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imgPhimCartLv"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_movie"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:contentDescription="Movie Poster"/>
+
+    <TextView
+        android:id="@+id/tvTenPhimCartLv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Movie Title"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/imgPhimCartLv"
+        app:layout_constraintTop_toTopOf="@+id/imgPhimCartLv"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        tools:ignore="HardcodedText"/>
+
+    <TextView
+        android:id="@+id/tvNgayXemCartLv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="12/2/2002 8:30"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/imgPhimCartLv"
+        app:layout_constraintTop_toBottomOf="@+id/tvTenPhimCartLv"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/darker_gray"
+        tools:ignore="HardcodedText"/>
+    <TextView
+        android:id="@+id/tvGheCartLv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Ghế: D30"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/imgPhimCartLv"
+        app:layout_constraintTop_toBottomOf="@+id/tvNgayXemCartLv"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/darker_gray"
+        tools:ignore="HardcodedText"/>
+    <TextView
+        android:id="@+id/tvGiaVeCartLv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Giá Vé"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/imgPhimCartLv"
+        app:layout_constraintTop_toBottomOf="@+id/tvGheCartLv"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/darker_gray"
+        tools:ignore="HardcodedText"/>
+    <TextView
+        android:id="@+id/tvThanhToanCartLv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Đã thanh toán"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/imgPhimCartLv"
+        app:layout_constraintTop_toBottomOf="@+id/tvGiaVeCartLv"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@android:color/background_dark"
+        tools:ignore="HardcodedText"/>
+    <TextView
+        android:id="@+id/movieRatingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8.5"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@+id/imgPhimCartLv"
+        app:layout_constraintBottom_toBottomOf="@+id/imgPhimCartLv"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="4dp"
+        tools:ignore="HardcodedText"/>
+
+    <ImageView
+        android:id="@+id/starIconImageView"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/baseline_local_movies_24"
+        app:layout_constraintStart_toEndOf="@+id/movieRatingTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/movieRatingTextView"
+        android:layout_marginStart="4dp"
+        tools:ignore="ContentDescription"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
