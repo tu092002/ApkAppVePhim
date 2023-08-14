@@ -24,6 +24,8 @@ public class Database extends SQLiteOpenHelper {
     public static String TB_Rap = "Rap";
     public static String TB_Ghe = "Ghe";
     public static String TB_XuatChieu = "XuatChieu";
+
+    public static String TB_VeDaThanhToanByRap = "VeDaThanhToanByRap";
     //Xuast chiếu
     public static String TB_XuatChieu_MaXuatChieu = "MaXuatChieu";
     public static String TB_XuatChieu_MaPhim = "MaPhim";
@@ -57,6 +59,11 @@ public class Database extends SQLiteOpenHelper {
     public static String TB_Ve_NgayDat = "NgayDat";
     public static String TB_Ve_NgayXem = "NgayXem";
     public static String TB_Ve_ThanhToan = "ThanhToan";
+
+
+    public static String TB_VeDaThanhToanByRap_TenRap = "TenRap";
+    public static String TB_VeDaThanhToanByRap_VeRapId = "VeRapId";
+    public static String TB_VeDaThanhToanByRap_SoLuong = "SoLuong";
     //    //LoaiVe
 //    public static String TB_LoaiVe_MaLoaiVe = "MaLoaiVe";
 //    public static String TB_LoaiVe_DonGia = "DonGia";
@@ -137,6 +144,11 @@ public class Database extends SQLiteOpenHelper {
                 + TB_Ghe_TenGhe + " TEXT, "
                 + TB_Ghe_Empty + " TEXT, "
                 + "FOREIGN KEY (" + TB_Ghe_MaRap + ") REFERENCES " + TB_Rap + "(" + TB_Rap_MaRap + ")) ";
+        String tbVeRap = "CREATE TABLE IF NOT EXISTS "
+                + TB_VeDaThanhToanByRap + "(" + TB_VeDaThanhToanByRap_VeRapId + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + TB_VeDaThanhToanByRap_TenRap + " TEXT, "
+                + TB_VeDaThanhToanByRap_SoLuong + " INTEGER)";
+
 
 
         db.execSQL(tbXuatChieu);
@@ -145,6 +157,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL(tbVe);
         db.execSQL(tbRap);
         db.execSQL(tbGhe);
+        db.execSQL(tbVeRap);
 
 
     }
