@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListGheDialog extends Dialog {
+    public static Ghe gheChon = new Ghe();
+    public static int indexGheChon = 1;
     TextView tvTenPhimDatVe, tvGiaPhimDatVe;
     List<Ghe> listGhe = new ArrayList<>();
     List<String> listTenRap = new ArrayList<>();
-    Ghe gheChon = new Ghe();
     GheDao gheDao;
-    public static int indexGheChon = 1;
     GheAdapter gheAdapter;
     GridView gvlistGheDatVe;
     Rap rapShowGhe;
@@ -58,27 +58,49 @@ public class ListGheDialog extends Dialog {
         gvlistGheDatVe.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                gheChon = listGhe.get(position);
+                if(gheChon !=  null){
+                    if(gheChon.getEmpty().equals("true")){
+                        Toast.makeText(getContext(), "Ghế "+ gheChon.getTenGhe() + ",Rạp "+ rapShowGhe.getTenRap(), Toast.LENGTH_SHORT).show();
+                        dismiss();
+                        if (callback != null) {
+                            callback.onDialogListGheDismissed(gheChon);
+                        }
+                    }
+                    else {
+                        dismiss();
+                        if (callback != null) {
+                            callback.onDialogListGheDismissed();
+                        }
+                    }
 
-
-                indexGheChon = position;
-                Ghe gheChon = listGhe.get(position);
-
-                Toast.makeText(getContext(), "Rạp "+rapShowGhe.getTenRap() + ",  Ghế " + listGhe.get(position).getTenGhe(), Toast.LENGTH_SHORT).show();
-
-                dismiss();
-                if (callback != null) {
-                    callback.onDialogListGheDismissed(gheChon);
                 }
+                else {
+                    dismiss();
+                    if (callback != null) {
+                        callback.onDialogListGheDismissed();
+                    }
+                }
+
             }
         });
         Button dismissButton = findViewById(R.id.dismiss_button);
         dismissButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
-                if (callback != null) {
-                    callback.onDialogListGheDismissed(gheChon);
+                if(gheChon !=  null){
+                    dismiss();
+                    if (callback != null) {
+                        callback.onDialogListGheDismissed(gheChon);
+                    }
                 }
+                else {
+                    dismiss();
+                    if (callback != null) {
+                        callback.onDialogListGheDismissed();
+                    }
+                }
+
             }
         });
     }
