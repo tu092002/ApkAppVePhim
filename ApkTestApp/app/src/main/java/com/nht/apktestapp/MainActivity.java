@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -47,7 +49,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
     public static Database database;
     public static SQLiteDatabase sqLiteDatabase;
-    TextView tvSearchPhim;
+//    TextView tvSearchPhim;
+    AutoCompleteTextView actvSearchPhim;
     PhimDao phimDao;
     PhimAdapter adapter;
     Context context;
@@ -105,12 +108,12 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
             }
 
         });
-        tvSearchPhim = (TextView) findViewById(R.id.tvSearchPhim);
+        actvSearchPhim = (AutoCompleteTextView) findViewById(R.id.actvSearchPhim);
         ImageButton ibtnSearchPhim = (ImageButton) findViewById(R.id.ibtnSearchPhim);
         ibtnSearchPhim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String keyWord = tvSearchPhim.getText().toString().trim();
+                String keyWord = actvSearchPhim.getText().toString().trim();
 //                list = phimDao.getListPhimByKeyWord(keyWord);
                 Cursor c = MainActivity.database.GetData("SELECT * FROM Phim WHERE TenPhim LIKE '%" + keyWord + "%'");
                 list.clear();
@@ -131,6 +134,17 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
             }
         });
+
+        //Gợi ý tìm kiếm
+        List<String> listTenPhim = new ArrayList<>();
+        listTenPhim = phimDao.getAllTenPhimToString();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                MainActivity.this, android.R.layout.simple_list_item_1, listTenPhim
+        );
+        actvSearchPhim.setAdapter(adapter);
+
+
+
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         setSupportActionBar(toolbar);
 
