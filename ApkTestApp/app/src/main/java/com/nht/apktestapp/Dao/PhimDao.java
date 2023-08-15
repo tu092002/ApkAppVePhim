@@ -156,5 +156,22 @@ public class PhimDao {
         return 1;
     }
 
-
+//Ham lấy list tên phim
+    public List<String> getAllTenPhimToString() {
+        List<String> ls = new ArrayList<>();// Tao danh sách rỗng
+        // Tạo con trỏ đọc bảng dữ liệu phim
+        Cursor c = MainActivity.sqLiteDatabase.query("Phim", null, null, null, null, null, null);
+        c.moveToFirst();/// Di chuyển con trỏ về bản ghi đầu tiên
+        // đọc
+        while (c.isAfterLast() == false) //  trong khi không phải dòng cuối thì vẫn đoọc
+        {
+            // Chuyển đối tượng thành chuỗi
+            String tenPhim = (c.getString(1));
+            ls.add(tenPhim);
+            c.moveToNext();
+        }
+        c.close();
+        Collections.reverse(ls);// phim mới thêm sẽ hiện ở đầu tiên
+        return ls;
+    }
 }
