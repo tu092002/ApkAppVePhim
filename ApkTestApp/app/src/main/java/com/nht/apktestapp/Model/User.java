@@ -1,27 +1,27 @@
 package com.nht.apktestapp.Model;
 
 public class User {
-    private static int  maUser;
-    private static String hoTen;
-    private static String username;
+    private  int  maUser;
+    private  String hoTen;
+    private String username;
 
-    private static String password;
+    private  String password;
 
 
 
-    private static String role;
-    private static byte[]  avt;
-    private static String online;
+    private  String role;
+    private  byte[]  avt;
+    private  String online;
 
-    public static String getOnline() {
+    public  String getOnline() {
         return online;
     }
 
-    public static void setOnline(String online) {
-        User.online = online;
+    public  void setOnline(String online) {
+        this.online = online;
     }
 
-    public static String getUsername() {
+    public  String getUsername() {
         return username;
     }
 
@@ -42,55 +42,55 @@ public class User {
 
 
 
-    public static byte[] getAvt() {
+    public byte[] getAvt() {
         return avt;
     }
 
-    public static void setAvt(byte[] avt) {
-        User.avt = avt;
+    public  void setAvt(byte[] avt) {
+        this.avt = avt;
     }
 
 
 
-    public static int getMaUser() {
+    public  int getMaUser() {
         return maUser;
     }
 
-    public static void setMaUser(int maUser) {
-        User.maUser = maUser;
+    public  void setMaUser(int maUser) {
+        this.maUser = maUser;
     }
 
-    public static String getHoTen() {
+    public  String getHoTen() {
         return hoTen;
     }
 
-    public static void setHoTen(String hoTen) {
-        User.hoTen = hoTen;
+    public  void setHoTen(String hoTen) {
+        this.hoTen = hoTen;
     }
 
-    public static String getUserName() {
+    public  String getUserName() {
         return username;
     }
 
 
-    public static void setUsername(String username) {
-        User.username = username;
+    public  void setUsername(String username) {
+        this.username = username;
     }
 
-    public static String getPassword() {
+    public  String getPassword() {
         return password;
     }
 
-    public static void setPassword(String password) {
-        User.password = password;
+    public  void setPassword(String password) {
+        this.password = password;
     }
 
-    public static String getRole() {
+    public  String getRole() {
         return role;
     }
 
-    public static void setRole(String role) {
-        User.role = role;
+    public  void setRole(String role) {
+        this.role = role;
     }
 
 
