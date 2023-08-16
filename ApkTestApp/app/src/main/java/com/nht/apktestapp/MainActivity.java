@@ -34,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.nht.apktestapp.Adapters.PhimAdapter;
 import com.nht.apktestapp.Admin.AdminPhim;
 import com.nht.apktestapp.Admin.AdminRap;
+import com.nht.apktestapp.Admin.UserManagerActivity;
 import com.nht.apktestapp.Dao.PhimDao;
 import com.nht.apktestapp.Dao.VeDao;
 import com.nht.apktestapp.Model.Ghe;
@@ -278,12 +279,12 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
         } else if (itemId == R.id.btnDangKyPage) {
             startActivity(new Intent(this, dangKy.class));
             // Xử lý logout nếu cần thiết
-        } else if (itemId == R.id.btnThongKe) {
+        } else if (itemId == R.id.btnThongKe && dangNhap.currentUser.getRole().equals("admin")) {
             startActivity(new Intent(this, ChartActivity.class));
             // Xử lý logout nếu cần thiết
-        } else if (itemId == R.id.btnInfoUser) {
-            startActivity(new Intent(this, HeaderActivity.class));
-            // Xử lý logout nếu cần thiết
+        }
+        else if (itemId == R.id.btnUserManager) {
+            startActivity(new Intent(this, UserManagerActivity.class));
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
