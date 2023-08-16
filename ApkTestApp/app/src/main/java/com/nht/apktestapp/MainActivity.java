@@ -50,8 +50,13 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
     public static Database database;
     public static SQLiteDatabase sqLiteDatabase;
+
 //    TextView tvSearchPhim;
     AutoCompleteTextView actvSearchPhim;
+
+    TextView tvSearchPhim;
+    TextView tvBadge;
+
     PhimDao phimDao;
     PhimAdapter adapter;
     Context context;
@@ -74,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
         database = new Database(this, "film.sqlite", null, 1);
         sqLiteDatabase = database.getWritableDatabase(); // cái này cho phép ghi dữ liệu database
 // có sqLiteDatabase mới dùng hàm đc Giỏ hàng number
-
+        tvBadge = (TextView)  findViewById(R.id.tvBadge);
         badgeNumber();
         // tạo hình avt
 //        imgAvtMainAct = (ImageView) findViewById(R.id.imgAvtMainAct);
@@ -161,15 +166,14 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
             MenuItem btnDangNhapPage = menu.findItem(R.id.btnDangNhapPage);
             btnDangNhapPage.setTitle("ĐĂNG XUẤT");
-            if ( !dangNhap.currentUser.getRole().equals("admin")) {
+            if (!dangNhap.currentUser.getRole().equals("admin")) {
                 // cho phép quản trị hay ko ?
                 MenuItem btnAdminPhim = menu.findItem(R.id.btnAdminPhim);
                 MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
                 btnAdminPhim.setVisible(false);
                 btnAdminRap.setVisible(false);
             }
-        } else if(dangNhap.currentUser == null)
-        {
+        } else if (dangNhap.currentUser == null) {
             // cho phép quản trị hay ko ?
 
             MenuItem btnAdminPhim = menu.findItem(R.id.btnAdminPhim);
@@ -177,7 +181,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
             btnAdminPhim.setVisible(false);
             btnAdminRap.setVisible(false);
         }
-
 
 
         ImageView imgAvtHeader = (ImageView) headerView.findViewById(R.id.imgAvtHeader);
@@ -202,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
             @Override
             public void onClick(View v) {
                 showCartDialog();
+                badgeNumber();
             }
         });
 
@@ -252,10 +256,14 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
     }
 
     public void badgeNumber() {
-        VeDao veDao = new VeDao();
-        List<Ve> listCart = veDao.getListCartOrVe();
-        TextView tvBadge = (TextView) findViewById(R.id.tvBadge);
-        tvBadge.setText(Integer.toString(listCart.size()));
+        if(dangNhap.currentUser != null){
+            VeDao veDao = new VeDao();
+            List<Ve> listCart = veDao.getListCartByUser(dangNhap.currentUser.getMaUser());
+            TextView tvBadge = (TextView) findViewById(R.id.tvBadge);
+            tvBadge.setText(Integer.toString(listCart.size()));
+            tvBadge.invalidate();
+        }
+
     }
 
     @Override
@@ -307,7 +315,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
     @Override
     public void onDialogListCartDismissed() {
-        recreate();
+        badgeNumber();
     }
 
     private void showCartDialog() {
@@ -323,8 +331,18 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
     }
 
     @Override
+    public void onDialogListGheDismissed() {
+
+    }
+
+    @Override
     public void onDialogNgayXemDismissed(LocalDateTime dateTimeNgayXem) {
 
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 
 

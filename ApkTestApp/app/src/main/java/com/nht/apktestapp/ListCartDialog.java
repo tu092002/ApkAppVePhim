@@ -40,7 +40,13 @@ public class ListCartDialog extends Dialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_cart);
         veDao = new VeDao();
-        listVe = veDao.getListCartOrVe();
+//        listVe = veDao.getListCartOrVe();
+        if(dangNhap.currentUser != null){
+            listVe  = veDao.getListCartByUser(dangNhap.currentUser.getMaUser());
+
+        }
+        else
+            listVe = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
         listVe.forEach(s -> {
@@ -53,7 +59,6 @@ public class ListCartDialog extends Dialog {
         lvCart.setAdapter(veAdapter);
 
 
-        ListView lvCart = (ListView) findViewById(R.id.lvCart);
 
 
         lvCart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
