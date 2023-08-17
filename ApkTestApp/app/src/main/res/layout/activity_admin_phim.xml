@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".Admin.AdminPhim">
+    tools:context=".Admin.AdminPhim"
+    android:background="@drawable/lavender_bkg"
+    >
 
 
     <LinearLayout
