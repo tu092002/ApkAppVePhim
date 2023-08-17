@@ -342,12 +342,22 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
     }
 
     @Override
+    public void onDialogListRapDismissed() {
+
+    }
+
+    @Override
     public void onDialogListGheDismissed() {
 
     }
 
     @Override
     public void onDialogNgayXemDismissed(LocalDateTime dateTimeNgayXem) {
+
+    }
+
+    @Override
+    public void onDialogNgayXemDismissed() {
 
     }
 
