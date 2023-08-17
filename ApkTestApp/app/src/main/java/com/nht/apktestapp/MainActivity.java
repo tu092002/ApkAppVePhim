@@ -170,6 +170,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
                 // cho phép quản trị hay ko ?
                 MenuItem btnAdminPhim = menu.findItem(R.id.btnAdminPhim);
                 MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
+                MenuItem btnThongKe  =  menu.findItem(R.id.btnThongKe);
+                btnThongKe.setVisible(false);
                 btnAdminPhim.setVisible(false);
                 btnAdminRap.setVisible(false);
             }
@@ -178,6 +180,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
             MenuItem btnAdminPhim = menu.findItem(R.id.btnAdminPhim);
             MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
+            MenuItem btnThongKe  =  menu.findItem(R.id.btnThongKe);
+            btnThongKe.setVisible(false);
             btnAdminPhim.setVisible(false);
             btnAdminRap.setVisible(false);
         }
@@ -217,6 +221,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
 
         //Khu vực khai báo, tạo viewFlipper
+        list =  phimDao.getAllPhimToString();
+
         for (int i = 0; i < 5; i++) {
             // Lấy tham chiếu đến ImageView và gắn hình ảnh cho nó
             ImageView imageView = findViewById(getResources().getIdentifier("imgv" + (i + 1), "id", getPackageName()));
