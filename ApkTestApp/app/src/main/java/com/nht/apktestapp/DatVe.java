@@ -36,7 +36,7 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
     public static Rap rapShowGhe;
     public static LocalDateTime limitedDateTime;
     TextView tvTenPhimDatVe, tvGiaPhimDatVe;
-    ImageView imgPhimDatVe,imgRapDatVe;
+    ImageView imgPhimDatVe, imgRapDatVe;
     List<Phim> list = new ArrayList<>();
     List<Rap> listRap;
     List<Ghe> listGhe;
@@ -84,8 +84,8 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
         tvTenPhimDatVe.setText(phim.getTenPhim());
         tvGiaPhimDatVe.setText(Double.toString(phim.getGiaPhim()));
         badgeNumber();
-        byte[]  imgPhim = phim.getImgPhim();
-        Bitmap  bitmap = BitmapFactory.decodeByteArray(imgPhim, 0, imgPhim.length);
+        byte[] imgPhim = phim.getImgPhim();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imgPhim, 0, imgPhim.length);
         imgPhimDatVe.setImageBitmap(bitmap);
 
         // Tạo một danh sách các mục
@@ -153,10 +153,12 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
                     // 9.thanh toanas ==  false
                     String thanhToan = "false";
                     // 10. TẠO VÉ
+
                     veDat = new Ve(maVe, maPhim, maUser, maRap, maGhe, ngayDatDateTime, ngayXemDatetime, giaVe, "false");
                     MainActivity.database.Querydata("insert into Ve(MaPhim, MaUser, MaRap, MaGhe, NgayDat, NgayXem, GiaVe, ThanhToan)"
                             + "values(" + maPhim + ", " + maUser + ", " + maRap + ", " + maGhe + ", '" + ngayDatDateTime.format(formatter) + "', '" + ngayXemDatetime.format(formatter) + "', " + giaVe + ", '" + thanhToan + "')");
                     Toast.makeText(DatVe.this, "Bạn đã thêm 1 vé phim", Toast.LENGTH_SHORT).show();
+
 
                     LocalDateTime currentDateTime = LocalDateTime.now();
                     limitedDateTime = currentDateTime.plusMinutes(1);
@@ -250,30 +252,41 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
     }
 
     @Override
+    public void onDialogNgayXemDismissed() {
+
+    }
+
+    @Override
     public void onDialogListRapDismissed(Rap rapShowGhe) {
         // Gọi hàm sau khi dialog Rap đã được đóng
+
         showGheDialog(rapShowGhe);
         btnChonRap.setText(rapShowGhe.getTenRap());
-        byte[]  imgRap = rapShowGhe.getImgRap();
-        Bitmap  bitmapRap = BitmapFactory.decodeByteArray(imgRap, 0, imgRap.length);
+        byte[] imgRap = rapShowGhe.getImgRap();
+        Bitmap bitmapRap = BitmapFactory.decodeByteArray(imgRap, 0, imgRap.length);
         imgRapDatVe.setImageBitmap(bitmapRap);
+
 
     }
 
     @Override
     public void onDialogListGheDismissed(Ghe gheChon) {
-        try{
+        try {
 
 
-                btnChonGhe.setText(gheChon.getTenGhe());
+            btnChonGhe.setText(gheChon.getTenGhe());
 
 
-        }
-        catch
-        (Exception e){
+        } catch
+        (Exception e) {
             Toast.makeText(this, "Lỗi " + e.toString(), Toast.LENGTH_SHORT).show();
         }
 
+
+    }
+
+    @Override
+    public void onDialogListRapDismissed() {
 
     }
 
