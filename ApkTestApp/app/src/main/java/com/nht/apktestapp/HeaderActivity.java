@@ -1,4 +1,4 @@
-package com.nht.apktestapp.ActController;
+package com.nht.apktestapp;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,8 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.nht.apktestapp.R;
 
 public class HeaderActivity extends AppCompatActivity {
 

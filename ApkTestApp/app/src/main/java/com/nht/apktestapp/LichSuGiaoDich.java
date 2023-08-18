@@ -1,4 +1,4 @@
-package com.nht.apktestapp.ActController;
+package com.nht.apktestapp;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.nht.apktestapp.Adapters.VeAdapter;
 import com.nht.apktestapp.Dao.VeDao;
 import com.nht.apktestapp.Model.Ve;
-import com.nht.apktestapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

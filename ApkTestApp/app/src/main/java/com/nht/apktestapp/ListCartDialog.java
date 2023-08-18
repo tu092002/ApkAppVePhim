@@ -1,4 +1,4 @@
-package com.nht.apktestapp.ActController;
+package com.nht.apktestapp;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import com.nht.apktestapp.Adapters.VeAdapter;
 import com.nht.apktestapp.Dao.VeDao;
 import com.nht.apktestapp.Model.Ve;
-import com.nht.apktestapp.R;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -79,7 +78,7 @@ public class ListCartDialog extends Dialog {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                     dialog.setTitle("XÁC NHẬN");
                     dialog.setMessage("Bạn có đồng ý xóa không ? ");
-                    dialog.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    dialog.setPositiveButton("Đồng ý", new OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 //                        MainActivity.sqLiteDatabase.rawQuery("DELETE  FROM Ve WHERE MaVe = ? ",
@@ -91,7 +90,7 @@ public class ListCartDialog extends Dialog {
                             veAdapter.notifyDataSetChanged();
                         }
                     });
-                    dialog.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                    dialog.setNegativeButton("Không đồng ý", new OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
@@ -131,7 +130,7 @@ public class ListCartDialog extends Dialog {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("THÔNG BÁO");
                 builder.setMessage("BẠN CÓ MUỐN THANH TOÁN TẤT CẢ VÉ ?");
-                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Đồng ý", new OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -152,7 +151,7 @@ public class ListCartDialog extends Dialog {
                         }
                     }
                 });
-                builder.setNegativeButton("KHÔNG ĐỒNG Ý", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("KHÔNG ĐỒNG Ý", new OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

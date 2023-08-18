@@ -1,4 +1,4 @@
-package com.nht.apktestapp.ActController;
+package com.nht.apktestapp;
 
 import com.nht.apktestapp.Model.Ghe;
 import com.nht.apktestapp.Model.Rap;

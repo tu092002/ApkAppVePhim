@@ -1,4 +1,4 @@
-package com.nht.apktestapp.ActController;
+package com.nht.apktestapp;
 
 import static com.nht.apktestapp.ActController.DateTimePickerDialog.dateTimeNgayXem;
 
@@ -26,7 +26,6 @@ import com.nht.apktestapp.Model.Ghe;
 import com.nht.apktestapp.Model.Phim;
 import com.nht.apktestapp.Model.Rap;
 import com.nht.apktestapp.Model.Ve;
-import com.nht.apktestapp.R;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

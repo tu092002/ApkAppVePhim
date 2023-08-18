@@ -1,11 +1,11 @@
-package com.nht.apktestapp.ActController;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.nht.apktestapp;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -16,11 +16,8 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.nht.apktestapp.Dao.RapDao;
 import com.nht.apktestapp.Dao.VeDaThanhToanDao;
-import com.nht.apktestapp.Model.Rap;
 import com.nht.apktestapp.Model.VeDaThanhToanByRap;
-import com.nht.apktestapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

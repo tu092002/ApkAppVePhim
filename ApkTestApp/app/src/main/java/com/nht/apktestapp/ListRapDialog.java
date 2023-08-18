@@ -1,4 +1,4 @@
-package com.nht.apktestapp.ActController;
+package com.nht.apktestapp;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -13,7 +13,6 @@ import com.nht.apktestapp.Adapters.RapAdapter;
 import com.nht.apktestapp.Dao.RapDao;
 import com.nht.apktestapp.Model.Phim;
 import com.nht.apktestapp.Model.Rap;
-import com.nht.apktestapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,8 @@
-package com.nht.apktestapp.ActController;
+package com.nht.apktestapp;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.nht.apktestapp.R;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class itemPhim extends AppCompatActivity {
 

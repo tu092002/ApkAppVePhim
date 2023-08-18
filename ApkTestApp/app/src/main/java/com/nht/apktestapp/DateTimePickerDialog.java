@@ -1,4 +1,4 @@
-package com.nht.apktestapp.ActController;
+package com.nht.apktestapp;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
-
-import com.nht.apktestapp.R;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

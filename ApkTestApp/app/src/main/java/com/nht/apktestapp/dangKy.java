@@ -1,4 +1,4 @@
-package com.nht.apktestapp.ActController;
+package com.nht.apktestapp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nht.apktestapp.Dao.UserDao;
 import com.nht.apktestapp.Model.User;
-import com.nht.apktestapp.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
