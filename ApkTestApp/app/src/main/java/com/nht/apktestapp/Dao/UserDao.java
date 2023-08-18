@@ -5,13 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.nht.apktestapp.MainActivity;
-import com.nht.apktestapp.Model.Phim;
+import com.nht.apktestapp.ActController.MainActivity;
 import com.nht.apktestapp.Model.User;
-import com.nht.apktestapp.Database;
+import com.nht.apktestapp.ActController.Database;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class UserDao {

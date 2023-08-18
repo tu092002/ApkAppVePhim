@@ -15,37 +15,40 @@
         android:theme="@style/Theme.NavigationDrawer"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ActController.LichSuGiaoDich"
+            android:exported="false" />
+        <activity
+            android:name=".ActController.MainActivity"
             android:exported="false" />
         <activity
             android:name=".Admin.UserManagerActivity"
             android:exported="false" />
         <activity
-            android:name=".ChartActivity"
+            android:name=".ActController.ChartActivity"
             android:exported="false" />
         <activity
-            android:name=".HeaderActivity"
+            android:name=".ActController.HeaderActivity"
             android:exported="false" />
         <activity
-            android:name=".itemCart"
+            android:name=".ActController.itemCart"
             android:exported="false" />
         <activity
-            android:name=".DateTimePickerDialog"
+            android:name=".ActController.DateTimePickerDialog"
             android:exported="false" />
         <activity
-            android:name=".ListRapDialog"
+            android:name=".ActController.ListRapDialog"
             android:exported="false" />
         <activity
-            android:name=".ListGheDialog"
+            android:name=".ActController.ListGheDialog"
             android:exported="false" />
         <activity
-            android:name=".ListCartDialog"
+            android:name=".ActController.ListCartDialog"
             android:exported="false" />
         <activity
-            android:name=".DatVe"
+            android:name=".ActController.DatVe"
             android:exported="false" />
         <activity
-            android:name=".DetailPhim"
+            android:name=".ActController.DetailPhim"
             android:exported="false" />
         <activity
             android:name=".Admin.AdminUser"
@@ -54,33 +57,30 @@
             android:name=".Admin.AdminRap"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ActController.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"
-                   />
-
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
-            android:name=".itemPhim"
+            android:name=".ActController.itemPhim"
             android:exported="false" />
         <activity
             android:name=".Admin.AdminPhim"
             android:exported="true" />
         <activity
-            android:name=".dangNhap"
+            android:name=".ActController.dangNhap"
             android:exported="false" />
         <activity
-            android:name=".dangKy"
+            android:name=".ActController.dangKy"
             android:exported="true" />
     </application>
 

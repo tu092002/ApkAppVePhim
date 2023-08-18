@@ -1,4 +1,4 @@
-package com.nht.apktestapp;
+package com.nht.apktestapp.ActController;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nht.apktestapp.Dao.PhimDao;
 import com.nht.apktestapp.Model.Phim;
+import com.nht.apktestapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

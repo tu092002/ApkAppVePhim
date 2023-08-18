@@ -1,4 +1,4 @@
-package com.nht.apktestapp;
+package com.nht.apktestapp.ActController;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +20,7 @@ import com.nht.apktestapp.Dao.RapDao;
 import com.nht.apktestapp.Dao.VeDaThanhToanDao;
 import com.nht.apktestapp.Model.Rap;
 import com.nht.apktestapp.Model.VeDaThanhToanByRap;
+import com.nht.apktestapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

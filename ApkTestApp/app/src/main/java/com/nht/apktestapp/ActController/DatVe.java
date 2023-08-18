@@ -1,6 +1,6 @@
-package com.nht.apktestapp;
+package com.nht.apktestapp.ActController;
 
-import static com.nht.apktestapp.DateTimePickerDialog.dateTimeNgayXem;
+import static com.nht.apktestapp.ActController.DateTimePickerDialog.dateTimeNgayXem;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +26,7 @@ import com.nht.apktestapp.Model.Ghe;
 import com.nht.apktestapp.Model.Phim;
 import com.nht.apktestapp.Model.Rap;
 import com.nht.apktestapp.Model.Ve;
+import com.nht.apktestapp.R;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -82,7 +83,7 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
         Phim phim = list.get(DetailPhim.vitriClickPhim);// Khởi tạo Spinner
         btnChonRap = (Button) findViewById(R.id.btnChonRap);
         tvTenPhimDatVe.setText(phim.getTenPhim());
-        tvGiaPhimDatVe.setText(Double.toString(phim.getGiaPhim()));
+        tvGiaPhimDatVe.setText("GIÁ VÉ: "+ Double.toString(phim.getGiaPhim())+ " VNĐ");
         badgeNumber();
         byte[] imgPhim = phim.getImgPhim();
         Bitmap bitmap = BitmapFactory.decodeByteArray(imgPhim, 0, imgPhim.length);

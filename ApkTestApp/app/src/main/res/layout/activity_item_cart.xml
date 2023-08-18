@@ -16,14 +16,15 @@
         android:contentDescription="Movie Poster"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_movie"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTenRapCartLv"
-        android:layout_width="101dp"
-        android:layout_height="15dp"
+        android:layout_width="86dp"
+        android:layout_height="16dp"
         android:layout_marginTop="148dp"
         android:text="LOTTE"
         android:textColor="#EF0A0A"
@@ -37,16 +38,14 @@
 
     <TextView
         android:id="@+id/tvMaVeCartLv"
-        android:layout_width="118dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="83dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="140dp"
         android:text="MÃ SỐ 123"
         android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.752"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
@@ -90,14 +89,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:text="Ghế: D30"
         android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/imgPhimCartLv"
         app:layout_constraintTop_toBottomOf="@+id/tvNgayXemCartLv"
         tools:ignore="HardcodedText" />
@@ -119,41 +118,41 @@
 
     <TextView
         android:id="@+id/tvThanhToanCartLv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="95dp"
+        android:layout_height="18dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="Đã thanh toán"
-        android:textColor="@color/white"
+        android:textColor="#E91E63"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imgPhimCartLv"
         app:layout_constraintTop_toBottomOf="@+id/tvGiaVeCartLv"
-        tools:ignore="HardcodedText" />
-
-    <TextView
-        android:id="@+id/movieRatingTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="4dp"
-        android:text="8.5"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imgPhimCartLv"
-        app:layout_constraintStart_toEndOf="@+id/imgPhimCartLv"
         tools:ignore="HardcodedText" />
 
     <ImageView
         android:id="@+id/starIconImageView"
         android:layout_width="16dp"
         android:layout_height="16dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="4dp"
         android:src="@drawable/baseline_local_movies_24"
-        app:layout_constraintBottom_toBottomOf="@+id/movieRatingTextView"
-        app:layout_constraintStart_toEndOf="@+id/movieRatingTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvMaVeCartLv"
         tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tvNgayDatCartLv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="108dp"
+        android:text="22-2-2002 9:10"
+
+        android:textColor="#F2FF71"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

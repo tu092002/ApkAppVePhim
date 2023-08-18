@@ -5,8 +5,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.nht.apktestapp.Database;
-import com.nht.apktestapp.MainActivity;
+import com.nht.apktestapp.ActController.Database;
+import com.nht.apktestapp.ActController.MainActivity;
 import com.nht.apktestapp.Model.VeDaThanhToanByRap;
 
 import java.util.ArrayList;

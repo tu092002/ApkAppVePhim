@@ -1,4 +1,4 @@
-package com.nht.apktestapp;
+package com.nht.apktestapp.ActController;
 
 
 import android.annotation.SuppressLint;
@@ -41,6 +41,7 @@ import com.nht.apktestapp.Model.Ghe;
 import com.nht.apktestapp.Model.Phim;
 import com.nht.apktestapp.Model.Rap;
 import com.nht.apktestapp.Model.Ve;
+import com.nht.apktestapp.R;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
     public static Database database;
     public static SQLiteDatabase sqLiteDatabase;
 
-//    TextView tvSearchPhim;
+    //    TextView tvSearchPhim;
     AutoCompleteTextView actvSearchPhim;
 
     TextView tvSearchPhim;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
         database = new Database(this, "film.sqlite", null, 1);
         sqLiteDatabase = database.getWritableDatabase(); // cái này cho phép ghi dữ liệu database
 // có sqLiteDatabase mới dùng hàm đc Giỏ hàng number
-        tvBadge = (TextView)  findViewById(R.id.tvBadge);
+        tvBadge = (TextView) findViewById(R.id.tvBadge);
         badgeNumber();
         // tạo hình avt
 //        imgAvtMainAct = (ImageView) findViewById(R.id.imgAvtMainAct);
@@ -150,7 +151,6 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
         actvSearchPhim.setAdapter(adapter);
 
 
-
         Toolbar toolbar = findViewById(R.id.toolbar); //Ignore red line errors
         setSupportActionBar(toolbar);
 
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
                 MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
                 MenuItem btnThongKe = menu.findItem(R.id.btnThongKe);
                 MenuItem btnUserManager = menu.findItem(R.id.btnUserManager);
-        
+
                 btnThongKe.setVisible(false);
                 btnUserManager.setVisible(false);
                 btnAdminPhim.setVisible(false);
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
 
         //Khu vực khai báo, tạo viewFlipper
-        list =  phimDao.getAllPhimToString();
+        list = phimDao.getAllPhimToString();
 
         for (int i = 0; i < 5; i++) {
             // Lấy tham chiếu đến ImageView và gắn hình ảnh cho nó
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
     }
 
     public void badgeNumber() {
-        if(dangNhap.currentUser != null){
+        if (dangNhap.currentUser != null) {
             VeDao veDao = new VeDao();
             List<Ve> listCart = veDao.getListCartByUserVaChuaThanhToan(dangNhap.currentUser.getMaUser());
             TextView tvBadge = (TextView) findViewById(R.id.tvBadge);
@@ -303,11 +303,12 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
             startActivity(new Intent(this, ChartActivity.class));
             // Xử lý logout nếu cần thiết
-        }
-        else if (itemId == R.id.btnUserManager && dangNhap.currentUser.getRole().equals("admin")) {
+        } else if (itemId == R.id.btnUserManager && dangNhap.currentUser.getRole().equals("admin")) {
             startActivity(new Intent(this, UserManagerActivity.class));
+        } else if (itemId == R.id.btnHistory && dangNhap.currentUser != null) {
+            startActivity(new Intent(this, LichSuGiaoDich.class));
+            // Xử lý logout nếu cần thiết
         }
-
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -2,11 +2,9 @@ package com.nht.apktestapp.Admin;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteAbortException;
 import android.graphics.Bitmap;
@@ -14,21 +12,17 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.nht.apktestapp.Adapters.UserAdapter;
 import com.nht.apktestapp.Dao.UserDao;
-import com.nht.apktestapp.MainActivity;
-import com.nht.apktestapp.Model.Phim;
 import com.nht.apktestapp.Model.User;
 import com.nht.apktestapp.R;
 

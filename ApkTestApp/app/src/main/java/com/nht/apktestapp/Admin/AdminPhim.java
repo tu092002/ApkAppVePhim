@@ -22,7 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.nht.apktestapp.Dao.PhimDao;
-import com.nht.apktestapp.MainActivity;
+import com.nht.apktestapp.ActController.MainActivity;
 import com.nht.apktestapp.Model.Phim;
 import com.nht.apktestapp.Adapters.PhimAdapter;
 import com.nht.apktestapp.R;

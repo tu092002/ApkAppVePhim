@@ -1,8 +1,10 @@
-package com.nht.apktestapp;
+package com.nht.apktestapp.ActController;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.nht.apktestapp.R;
 
 public class itemCart extends AppCompatActivity {
 

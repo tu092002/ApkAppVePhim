@@ -8,10 +8,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.nht.apktestapp.Database;
-import com.nht.apktestapp.MainActivity;
+import com.nht.apktestapp.ActController.Database;
+import com.nht.apktestapp.ActController.MainActivity;
 import com.nht.apktestapp.Model.Ve;
-import com.nht.apktestapp.dangNhap;
+import com.nht.apktestapp.ActController.dangNhap;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

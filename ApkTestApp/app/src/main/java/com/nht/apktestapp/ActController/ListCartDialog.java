@@ -1,4 +1,4 @@
-package com.nht.apktestapp;
+package com.nht.apktestapp.ActController;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import com.nht.apktestapp.Adapters.VeAdapter;
 import com.nht.apktestapp.Dao.VeDao;
 import com.nht.apktestapp.Model.Ve;
+import com.nht.apktestapp.R;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

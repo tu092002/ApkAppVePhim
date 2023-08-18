@@ -23,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.nht.apktestapp.Adapters.RapAdapter;
 import com.nht.apktestapp.Dao.RapDao;
-import com.nht.apktestapp.MainActivity;
+import com.nht.apktestapp.ActController.MainActivity;
 import com.nht.apktestapp.Model.Rap;
 import com.nht.apktestapp.R;
 

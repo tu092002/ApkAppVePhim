@@ -7,7 +7,7 @@
     android:background="@drawable/lavender_bkg"
     android:gravity="top|center"
     android:orientation="vertical"
-    tools:context=".dangNhap">
+    tools:context=".ActController.dangNhap">
 
     <LinearLayout
         android:layout_width="match_parent"

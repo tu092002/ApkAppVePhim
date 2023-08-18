@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dangKy"
+    tools:context=".ActController.dangKy"
     android:background="@drawable/lavender_bkg"
     android:gravity="top|center"
     android:orientation="vertical">

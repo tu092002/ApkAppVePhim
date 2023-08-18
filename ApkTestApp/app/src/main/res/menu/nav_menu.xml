@@ -35,6 +35,11 @@
             android:icon="@drawable/baseline_person_24"
             android:title="QUẢN LÝ USER"
             />
+        <item
+            android:id="@+id/btnHistory"
+            android:icon="@drawable/baseline_history_24"
+            android:title="Lịch sử giao dịch"
+            />
     </group>
     <item
         android:title="">

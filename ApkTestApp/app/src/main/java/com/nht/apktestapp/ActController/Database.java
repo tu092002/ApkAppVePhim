@@ -1,4 +1,4 @@
-package com.nht.apktestapp;
+package com.nht.apktestapp.ActController;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
