@@ -10,6 +10,18 @@ public class Phim {
     private byte[] imgPhim;
     private double giaPhim;
 
+    private double diemPhim;
+
+    public double getDiemPhim() {
+        return diemPhim;
+    }
+
+    public void setDiemPhim(double diemPhim) {
+        this.diemPhim = diemPhim;
+    }
+
+
+
 
     public double getGiaPhim() {
         return giaPhim;

@@ -135,6 +135,9 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
                     c.moveToNext();
                 }
                 c.close();
+                adapter = new PhimAdapter(MainActivity.this, R.layout.activity_item_phim, list);
+                gvListPhimMain.setAdapter(adapter);
+
                 adapter.notifyDataSetChanged();
 
 
@@ -249,6 +252,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
                 int itemId = item.getItemId();
                 if (itemId == R.id.actionHome) {
                     Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this, MainActivity.class));
                     return true;
                 } else if (itemId == R.id.actionHistory) {
                     Toast.makeText(MainActivity.this, "History", Toast.LENGTH_SHORT).show();
