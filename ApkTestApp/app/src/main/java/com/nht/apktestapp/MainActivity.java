@@ -170,25 +170,26 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
                 // cho phép quản trị hay ko ?
                 MenuItem btnAdminPhim = menu.findItem(R.id.btnAdminPhim);
                 MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
-                MenuItem btnThongKe  =  menu.findItem(R.id.btnThongKe);
-                MenuItem btnUserManager  =  menu.findItem(R.id.btnUserManager);
+                MenuItem btnThongKe = menu.findItem(R.id.btnThongKe);
+                MenuItem btnUserMangager = menu.findItem(R.id.btnUserManager);
+        
                 btnThongKe.setVisible(false);
                 btnUserManager.setVisible(false);
                 btnAdminPhim.setVisible(false);
                 btnAdminRap.setVisible(false);
             }
         } else if (dangNhap.currentUser == null) {
-            // cho phép quản trị hay ko ?
-            MenuItem btnUserManager  =  menu.findItem(R.id.btnUserManager);
-
+            // cho phép quản trị hay ko 
             MenuItem btnAdminPhim = menu.findItem(R.id.btnAdminPhim);
             MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
-            MenuItem btnThongKe  =  menu.findItem(R.id.btnThongKe);
-            btnUserManager.setVisible(false);
+            MenuItem btnThongKe = menu.findItem(R.id.btnThongKe);
+            MenuItem btnUserMangager = menu.findItem(R.id.btnUserManager);
 
-            btnThongKe.setVisible(false);
+
             btnAdminPhim.setVisible(false);
             btnAdminRap.setVisible(false);
+            btnThongKe.setVisible(false);
+            btnUserMangager.setVisible(false);
         }
 
 
@@ -299,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
             startActivity(new Intent(this, dangKy.class));
             // Xử lý logout nếu cần thiết
         } else if (itemId == R.id.btnThongKe && dangNhap.currentUser.getRole().equals("admin")) {
+
             startActivity(new Intent(this, ChartActivity.class));
             // Xử lý logout nếu cần thiết
         }

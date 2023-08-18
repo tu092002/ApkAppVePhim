@@ -6,12 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SplashActivity"
     android:background="#210D45">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="dfdfdfdfd"
-        >
-    </TextView>
+
     <View
         android:id="@+id/topView1"
         android:layout_width="18dp"
