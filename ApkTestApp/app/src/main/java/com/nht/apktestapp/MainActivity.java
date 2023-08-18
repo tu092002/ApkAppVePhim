@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
     public void badgeNumber() {
         if(dangNhap.currentUser != null){
             VeDao veDao = new VeDao();
-            List<Ve> listCart = veDao.getListCartByUser(dangNhap.currentUser.getMaUser());
+            List<Ve> listCart = veDao.getListCartByUserVaChuaThanhToan(dangNhap.currentUser.getMaUser());
             TextView tvBadge = (TextView) findViewById(R.id.tvBadge);
             tvBadge.setText(Integer.toString(listCart.size()));
             tvBadge.invalidate();

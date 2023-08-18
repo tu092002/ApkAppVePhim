@@ -29,8 +29,9 @@ public class ListCartDialog extends Dialog {
     VeAdapter veAdapter;
     ArrayList<String> listTenVe = new ArrayList<>();
     List<Ve> listVe = new ArrayList<>();
-    private OnDialogDismissListener callback;
     ListView lvCart;
+    private OnDialogDismissListener callback;
+
     public ListCartDialog(@NonNull Context context, OnDialogDismissListener callback) {
         super(context);
         this.callback = callback;
@@ -41,11 +42,10 @@ public class ListCartDialog extends Dialog {
         setContentView(R.layout.dialog_cart);
         veDao = new VeDao();
 //        listVe = veDao.getListCartOrVe();
-        if(dangNhap.currentUser != null){
-            listVe  = veDao.getListCartByUser(dangNhap.currentUser.getMaUser());
+        if (dangNhap.currentUser != null) {
+            listVe = veDao.getListCartByUserVaChuaThanhToan(dangNhap.currentUser.getMaUser());
 
-        }
-        else
+        } else
             listVe = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
@@ -54,17 +54,15 @@ public class ListCartDialog extends Dialog {
         });
 
         veAdapter = new VeAdapter(getContext(), R.layout.activity_item_cart, listVe);
-        ArrayAdapter adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1,listTenVe);
-        lvCart =  (ListView) findViewById(R.id.lvCart);
+        ArrayAdapter adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, listTenVe);
+        lvCart = (ListView) findViewById(R.id.lvCart);
         lvCart.setAdapter(veAdapter);
-
-
 
 
         lvCart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), "Vé #"+ listVe.get(position).getMaVe(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Vé #" + listVe.get(position).getMaVe(), Toast.LENGTH_SHORT).show();
 
                 LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -113,6 +111,57 @@ public class ListCartDialog extends Dialog {
                 if (callback != null) {
                     callback.onDialogListCartDismissed();
                 }
+            }
+        });
+
+        Button btnThanhToan = findViewById(R.id.btnThanhToan);
+        if (dangNhap.currentUser == null) {
+            Toast.makeText(getContext(), "Bạn cần login để mua vé", Toast.LENGTH_SHORT).show();
+            btnThanhToan.setVisibility(View.GONE);
+        }
+        if ( listVe.isEmpty()) {
+            Toast.makeText(getContext(), "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+            btnThanhToan.setVisibility(View.GONE);
+        }
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("THÔNG BÁO");
+                builder.setMessage("BẠN CÓ MUỐN THANH TOÁN TẤT CẢ VÉ ?");
+                builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        veDao = new VeDao();
+                        int kqThanhToan = veDao.thanhToanVe();
+                        if (kqThanhToan == 1) {
+                            Toast.makeText(getContext(), "Thanh toán thành công !!!", Toast.LENGTH_SHORT).show();
+                            // clear ở phía giao diện
+
+                            listVe.clear();
+
+                            veAdapter.notifyDataSetChanged();
+                            lvCart.invalidate();
+
+                        }
+                        else{
+                            Toast.makeText(getContext(), "Bạn đã thanh toán thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                builder.setNegativeButton("KHÔNG ĐỒNG Ý", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+
             }
         });
     }
