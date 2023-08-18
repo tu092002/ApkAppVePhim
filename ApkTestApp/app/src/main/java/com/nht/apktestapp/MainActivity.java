@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
                 MenuItem btnAdminPhim = menu.findItem(R.id.btnAdminPhim);
                 MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
                 MenuItem btnThongKe = menu.findItem(R.id.btnThongKe);
-                MenuItem btnUserMangager = menu.findItem(R.id.btnUserManager);
+                MenuItem btnUserManager = menu.findItem(R.id.btnUserManager);
         
                 btnThongKe.setVisible(false);
                 btnUserManager.setVisible(false);
