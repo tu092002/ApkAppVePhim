@@ -9,9 +9,13 @@ public interface OnDialogDismissListener {
 
     void onDialogListRapDismissed(Rap rapShowGhe);
     void onDialogListGheDismissed(Ghe gheChon);
+    void onDialogListRapDismissed();
+
     void onDialogListGheDismissed();
 
     void onDialogNgayXemDismissed(LocalDateTime dateTimeNgayXem);
+    void onDialogNgayXemDismissed();
+
     void onDialogListCartDismissed();
 
 }

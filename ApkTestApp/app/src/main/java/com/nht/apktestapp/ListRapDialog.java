@@ -29,7 +29,7 @@ public class ListRapDialog extends Dialog {
     GridView gvlistRapDatVe;
     boolean[] flag = {false};
     public static int indexRapChon = 1;
-    Rap rapShowGhe = new Rap();
+    Rap rapShowGhe=  null;
     private OnDialogDismissListener callback;
 
     public ListRapDialog(Context context, Rap dataToPassRap, OnDialogDismissListener callback) {
@@ -85,11 +85,21 @@ public class ListRapDialog extends Dialog {
         dismissButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
-                if (callback != null) {
-                    callback.onDialogListRapDismissed(rapShowGhe);
+                if(rapShowGhe != null){
+                    dismiss();
+                    if (callback != null) {
+                        callback.onDialogListRapDismissed(rapShowGhe);
 
+                    }
                 }
+                else{
+                    dismiss();
+                    if (callback != null) {
+                        callback.onDialogListRapDismissed();
+
+                    }
+                }
+
             }
         });
     }

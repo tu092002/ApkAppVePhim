@@ -69,10 +69,19 @@ public class DateTimePickerDialog extends Dialog {
         dismissButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
-                if (callback != null) {
-                    callback.onDialogNgayXemDismissed(dateTimeNgayXem);
+                if(dateTimeNgayXem != null){
+                    dismiss();
+                    if (callback != null) {
+                        callback.onDialogNgayXemDismissed(dateTimeNgayXem);
+                    }
                 }
+                else {
+                    dismiss();
+                    if (callback != null) {
+                        callback.onDialogNgayXemDismissed();
+                    }
+                }
+
             }
         });
     }

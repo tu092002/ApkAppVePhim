@@ -7,7 +7,8 @@
     tools:context=".Admin.UserManagerActivity"
     android:layout_margin="10dp"
     android:padding="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/lavender_bkg">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -172,18 +172,20 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
                 MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
                 MenuItem btnThongKe = menu.findItem(R.id.btnThongKe);
                 MenuItem btnUserMangager = menu.findItem(R.id.btnUserManager);
+        
                 btnThongKe.setVisible(false);
-                btnUserMangager.setVisible(false);
+                btnUserManager.setVisible(false);
                 btnAdminPhim.setVisible(false);
                 btnAdminRap.setVisible(false);
             }
         } else if (dangNhap.currentUser == null) {
-            // cho phép quản trị hay ko ?
-
+            // cho phép quản trị hay ko 
             MenuItem btnAdminPhim = menu.findItem(R.id.btnAdminPhim);
             MenuItem btnAdminRap = menu.findItem(R.id.btnAdminRap);
             MenuItem btnThongKe = menu.findItem(R.id.btnThongKe);
             MenuItem btnUserMangager = menu.findItem(R.id.btnUserManager);
+
+
             btnAdminPhim.setVisible(false);
             btnAdminRap.setVisible(false);
             btnThongKe.setVisible(false);
@@ -225,6 +227,8 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
 
 
         //Khu vực khai báo, tạo viewFlipper
+        list =  phimDao.getAllPhimToString();
+
         for (int i = 0; i < 5; i++) {
             // Lấy tham chiếu đến ImageView và gắn hình ảnh cho nó
             ImageView imageView = findViewById(getResources().getIdentifier("imgv" + (i + 1), "id", getPackageName()));
@@ -340,12 +344,22 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
     }
 
     @Override
+    public void onDialogListRapDismissed() {
+
+    }
+
+    @Override
     public void onDialogListGheDismissed() {
 
     }
 
     @Override
     public void onDialogNgayXemDismissed(LocalDateTime dateTimeNgayXem) {
+
+    }
+
+    @Override
+    public void onDialogNgayXemDismissed() {
 
     }
 

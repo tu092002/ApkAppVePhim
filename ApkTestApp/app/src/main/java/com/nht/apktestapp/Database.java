@@ -1,5 +1,6 @@
 package com.nht.apktestapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -150,7 +151,6 @@ public class Database extends SQLiteOpenHelper {
                 + TB_VeDaThanhToanByRap_SoLuong + " INTEGER)";
 
 
-
         db.execSQL(tbXuatChieu);
         db.execSQL(tbUser);
         db.execSQL(tbPhim);
@@ -200,7 +200,6 @@ public class Database extends SQLiteOpenHelper {
         }
 
     }
-
 
 
     public int InsertRapToDb(Rap p) {
@@ -278,12 +277,30 @@ public class Database extends SQLiteOpenHelper {
         return usernameExists;
     }
 
+
+    @SuppressLint("Range")
+    public Boolean isSeatEmpty(int maGhe) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {"Empty"};
+        String selection = "MaGhe = ?";
+        String[] selectionArgs = {String.valueOf(maGhe)};
+
+        Cursor cursor = db.query("Ghe", columns, selection, selectionArgs, null, null, null);
+        Boolean isEmpty = false;
+        if (cursor != null && cursor.moveToFirst()) {
+            isEmpty = cursor.getString(cursor.getColumnIndex("MaGhe")) == "true";
+            cursor.close();
+        }
+        return isEmpty;
+    }
+
+
     public User GetUserByUsername(String username, String password) {
         SQLiteDatabase database = getReadableDatabase();
         User user = new User();
 
         String selectQuery = "SELECT * FROM " + TB_User + " WHERE " + TB_User_UserName + " = '" + username + "' AND "
-                + TB_User_Password + " = '" + password+ "'";
+                + TB_User_Password + " = '" + password + "'";
         Cursor cursor = MainActivity.database.GetData(selectQuery);
 
         if (cursor != null && cursor.moveToFirst()) {
@@ -356,6 +373,7 @@ public class Database extends SQLiteOpenHelper {
             return true;
         return false;
     }
+
     public List<String> getImageUrlsFromDatabase() {
         List<String> urls = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
