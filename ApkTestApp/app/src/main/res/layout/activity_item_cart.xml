@@ -155,5 +155,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/movieRatingTextView"
         app:layout_constraintStart_toEndOf="@+id/movieRatingTextView"
         tools:ignore="ContentDescription" />
+    <TextView
+        android:id="@+id/tvNgayDatCartLv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="108dp"
+        android:text="22-2-2002 9:10"
 
+        android:textColor="#F2FF71"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

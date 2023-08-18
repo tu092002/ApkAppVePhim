@@ -82,7 +82,8 @@ public class DatVe extends AppCompatActivity implements OnDialogDismissListener 
         Phim phim = list.get(DetailPhim.vitriClickPhim);// Khởi tạo Spinner
         btnChonRap = (Button) findViewById(R.id.btnChonRap);
         tvTenPhimDatVe.setText(phim.getTenPhim());
-        tvGiaPhimDatVe.setText(Double.toString(phim.getGiaPhim()));
+//        tvGiaPhimDatVe.setText(Double.toString(phim.getGiaPhim()));
+        tvGiaPhimDatVe.setText("GIÁ VÉ: "+ Double.toString(phim.getGiaPhim())+ " VNĐ");
         badgeNumber();
         byte[] imgPhim = phim.getImgPhim();
         Bitmap bitmap = BitmapFactory.decodeByteArray(imgPhim, 0, imgPhim.length);
