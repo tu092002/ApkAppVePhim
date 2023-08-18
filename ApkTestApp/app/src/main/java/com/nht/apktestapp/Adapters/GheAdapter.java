@@ -65,7 +65,7 @@ public class GheAdapter extends BaseAdapter {
 //     Cursor c =  MainActivity.database.GetData("SELECT * FROM Ghe  WHERE TenGhe = '" + arrayList.get(position).getTenGhe() + "' LIMIT 1");
 //        c.moveToFirst();
         if (ghe.getEmpty().equals("false") ) {
-                viewHolder.imgGheGv.setBackgroundResource(R.drawable.aklogo);
+                viewHolder.imgGheGv.setImageResource(R.drawable.ghe_user);
         }
 
 
