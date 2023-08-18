@@ -48,7 +48,15 @@ public class PhimDao {
         c.close();
         return imgPhim;
     }
-
+    public Double getDiemPhimById(int id) {
+        Double diem = null;
+        Cursor c = MainActivity.database.GetData("SELECT * FROM Phim Where MaPhim = '" + id + "' LIMIT 1");
+        c.moveToFirst();
+        int indexOfDiemPhim  = c.getColumnIndex("DiemPhim");
+        diem = c.getDouble(indexOfDiemPhim);
+        c.close();
+        return diem;
+    }
     public List<Phim> getListPhimByKeyWord(String keyWord) {
         List<Phim> listPhimBykeyword = new ArrayList<>();
         Cursor c = MainActivity.database.GetData("SELECT * FROM Phim WHERE TenPhim LIKE '%" + keyWord + "%'");
@@ -61,6 +69,7 @@ public class PhimDao {
             p.setMoTa(c.getString(2));
             p.setImgPhim(c.getBlob(3));
             p.setGiaPhim(c.getDouble(4));
+            p.setDiemPhim(c.getDouble(5));
             listPhimBykeyword.add(p);
             c.moveToNext();
         }
@@ -103,6 +112,7 @@ public class PhimDao {
             p.setMoTa(c.getString(2));
             p.setImgPhim(c.getBlob(3));
             p.setGiaPhim(c.getDouble(4));
+            p.setDiemPhim(c.getDouble(5));
             // Chuyển đối tượng thành chuỗi
             ls.add(p);
             c.moveToNext();
@@ -173,5 +183,12 @@ public class PhimDao {
         c.close();
         Collections.reverse(ls);// phim mới thêm sẽ hiện ở đầu tiên
         return ls;
+    }
+
+    public void UpdateDiemPhim(Double i, int maPhim) {
+        Double diem = getDiemPhimById(maPhim);
+        diem = (diem + i) / 2;
+//        MainActivity.sqLiteDatabase.rawQuery("UPdate Phim Set DiemPhim = ? Where MaPhim = ?", new String[]{Double.toString(diem), Integer.toString(maPhim)});
+        MainActivity.database.Querydata("update Phim Set DiemPhim ="+ diem +" Where MaPhim = "+ maPhim);
     }
 }

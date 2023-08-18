@@ -48,6 +48,8 @@ public class Database extends SQLiteOpenHelper {
     public static String TB_Phim_ImgPhim = "ImgPhim";
     public static String TB_Phim_GiaPhim = "GiaPhim";
 
+    public static String TB_Phim_Diem = "DiemPhim";
+
     //Ve
     public static String TB_Ve_MaVe = "MaVe";
     public static String TB_Ve_MaPhim = "MaPhim";
@@ -113,11 +115,12 @@ public class Database extends SQLiteOpenHelper {
                 + TB_User_Avt + " BLOB,"
                 + TB_User_Online + " TEXT )";
 
-        String tbPhim = "CREATE TABLE  IF NOT EXISTS " + TB_Phim + " (" + TB_Phim_MaPhim + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+        String tbPhim = "CREATE TABLE IF NOT EXISTS " + TB_Phim + " (" + TB_Phim_MaPhim + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + TB_Phim_TenPhim + " TEXT, "
                 + TB_Phim_MoTa + " TEXT,"
                 + TB_Phim_ImgPhim + " BLOB, "
-                + TB_Phim_GiaPhim + " DOUBLE )";
+                + TB_Phim_GiaPhim + " DOUBLE, "
+                + TB_Phim_Diem + " DOUBLE )";
 
 
         String tbVe = "CREATE TABLE IF NOT EXISTS " + TB_Ve + " (" + TB_Ve_MaVe + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -184,7 +187,7 @@ public class Database extends SQLiteOpenHelper {
     public int InsertPhimToDb(Phim p) {
         try {
             SQLiteDatabase db = getReadableDatabase();
-            String sql = "INSERT INTO Phim VALUES(null, ?, ?, ?,?)";
+            String sql = "INSERT INTO Phim VALUES(null, ?, ?, ?, ?, ?)";
             SQLiteStatement statement = db.compileStatement(sql);
             statement.clearBindings();
 
@@ -192,6 +195,7 @@ public class Database extends SQLiteOpenHelper {
             statement.bindString(2, p.getMoTa());
             statement.bindBlob(3, p.getImgPhim());
             statement.bindDouble(4, p.getGiaPhim());
+            statement.bindDouble(5, 10.0);
 
             statement.executeInsert();
             return 1; // thành công

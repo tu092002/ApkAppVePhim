@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,9 @@ public class DetailPhim extends AppCompatActivity {
     PhimDao phimDao;
     public static  int vitriClickPhim;
     Button btnDatVePage;
+
+    EditText txtDanhGia;
+    Button btnDanhGia;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,10 @@ public class DetailPhim extends AppCompatActivity {
         tvGiaPhimDetail = (TextView) findViewById(R.id.tvGiaPhimDetail);
         tvMoTaPhimDetail = (TextView)  findViewById(R.id.tvMotaPhimDetail);
         imgPhimDetail = (ImageView)  findViewById(R.id.imgPhimDetail);
+
+        txtDanhGia = (EditText) findViewById(R.id.txtDanhGia);
+        btnDanhGia = (Button) findViewById(R.id.btnDanhGia);
+
         Intent i = getIntent();
         Bundle  b = i.getExtras();
         phimDao = new PhimDao();
@@ -68,6 +76,22 @@ public class DetailPhim extends AppCompatActivity {
                     i.putExtras(b);
                     Toast.makeText(DetailPhim.this, "Phim " + list.get(vitriClickPhim).getTenPhim(), Toast.LENGTH_SHORT).show();
                     startActivity(i);
+                }
+
+            }
+        });
+
+        btnDanhGia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dangNhap.currentUser == null) {
+                    Toast.makeText(DetailPhim.this, "Bạn cần đăng nhập trước khi đặt vé!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(DetailPhim.this, dangNhap.class));
+                } else if (txtDanhGia == null)
+                    Toast.makeText(DetailPhim.this, "Vui lòng nhập điểm đánh giá", Toast.LENGTH_SHORT).show();
+                else {
+                    phimDao.UpdateDiemPhim(Double.parseDouble(txtDanhGia.getText().toString()), phim.getMaPhim());
+                    Toast.makeText(DetailPhim.this, "Thành công", Toast.LENGTH_SHORT).show();
                 }
 
             }
