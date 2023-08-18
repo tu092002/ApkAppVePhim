@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SplashActivity"
-    android:background="#210D45">
+    android:background="@drawable/bgticket3">
 
     <View
         android:id="@+id/topView1"
@@ -74,8 +74,8 @@
 
         <ImageView
             android:id="@+id/imgLogo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:src="@drawable/ic_movie"></ImageView>
 
         <TextView
@@ -97,6 +97,7 @@
             android:layout_marginTop="20dp"
             android:text="Believe in your dreams!!!"
             android:textColor="@color/white"
+            android:textSize="25dp"
             android:textStyle="italic"></TextView>
 
     </LinearLayout>
