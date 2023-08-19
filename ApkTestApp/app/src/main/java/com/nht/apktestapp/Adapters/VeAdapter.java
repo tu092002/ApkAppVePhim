@@ -59,6 +59,7 @@ public class VeAdapter extends BaseAdapter {
         TextView tvTenPhimCartLv =(TextView) convertView.findViewById(R.id.tvTenPhimCartLv);
         TextView tvTenGheCartLv =(TextView) convertView.findViewById(R.id.tvTenGheCartLv);
         TextView tvNgayXemCartLv =(TextView) convertView.findViewById(R.id.tvNgayXemCartLv);
+        TextView tvNgayDatCartLv =(TextView) convertView.findViewById(R.id.tvNgayDatCartLv);
 
         PhimDao phimDao = new PhimDao();
         GheDao gheDao = new GheDao();
@@ -72,7 +73,15 @@ public class VeAdapter extends BaseAdapter {
         // các trường còn lại chuyển ra list VIew cart
         tvMaVeCartLv.setText(Integer.toString(listVe.get(position).getMaVe()));
         tvGiaVeCartLv.setText(Double.toString(listVe.get(position).getGiaVe()));
-        tvThanhToanCartLv.setText(listVe.get(position).getThanhToan());
+        tvThanhToanCartLv.setText("Chưa thanh toán");
+
+        if(listVe.get(position).getThanhToan().equals("true")){
+            tvThanhToanCartLv.setText("Đã thanh toán");
+            tvThanhToanCartLv.setTextColor(R.drawable.baseline_add_24);// xanh
+
+
+        }
+
         tvTenPhimCartLv.setText(phimDao.getTenPhimById(listVe.get(position).getMaPhim()));
         tvTenRapCartLv.setText(rapDao.getTenRapById(listVe.get(position).getMaRap()));
 
@@ -80,6 +89,8 @@ public class VeAdapter extends BaseAdapter {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         tvNgayXemCartLv.setText(listVe.get(position).getNgayXem().format(formatter));
+        tvNgayDatCartLv.setText(listVe.get(position).getNgayDat().format(formatter));
+
         return convertView;
     }
 }

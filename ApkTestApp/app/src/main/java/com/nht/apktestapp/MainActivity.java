@@ -264,6 +264,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
                     Toast.makeText(MainActivity.this, "me", Toast.LENGTH_SHORT).show();
                     return true;
                 }
+
                 return false;
 
             }
@@ -311,7 +312,10 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
         else if (itemId == R.id.btnUserManager && dangNhap.currentUser.getRole().equals("admin")) {
             startActivity(new Intent(this, UserManagerActivity.class));
         }
-
+        else if (itemId == R.id.btnHistory && dangNhap.currentUser != null) {
+            startActivity(new Intent(this, LichSuGiaoDich.class));
+            // Xử lý logout nếu cần thiết
+        }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
