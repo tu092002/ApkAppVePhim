@@ -34,7 +34,7 @@ public class VeDaThanhToanDao {
     public List<VeDaThanhToanByRap> getVeDaThanhToanByRap() {
         List<VeDaThanhToanByRap> list = new ArrayList<>();
 //        SQLiteDatabase db = db.getReadableDatabase();
-        Cursor cursor = MainActivity.sqLiteDatabase.rawQuery("SELECT Rap.tenRap, COUNT(Ve.MaVe) AS SoVeDaThanhToan FROM Ve INNER JOIN Rap ON Ve.maRap = Rap.MaRap WHERE Ve.ThanhToan = 'false' GROUP BY Rap.tenRap", null);
+        Cursor cursor = MainActivity.sqLiteDatabase.rawQuery("SELECT Rap.tenRap, COUNT(Ve.MaVe) AS SoVeDaThanhToan FROM Ve INNER JOIN Rap ON Ve.maRap = Rap.MaRap WHERE Ve.ThanhToan = 'true' GROUP BY Rap.tenRap", null);
 //        if (cursor.moveToFirst()) {
 //            do {
         cursor.moveToFirst();

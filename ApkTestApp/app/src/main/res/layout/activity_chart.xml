@@ -18,12 +18,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Theo Rạp"
+            android:visibility="gone"
             android:textSize="12dp"/>
 
         <Button
             android:id="@+id/btnChart2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="Theo ngày, tháng"
             android:textSize="12dp"/>
 
@@ -31,6 +33,7 @@
             android:id="@+id/btnChart3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="Theo User"
             android:textSize="12dp"/>
     </LinearLayout>
