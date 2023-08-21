@@ -90,8 +90,13 @@ public class DetailPhim extends AppCompatActivity {
                 } else if (txtDanhGia == null)
                     Toast.makeText(DetailPhim.this, "Vui lòng nhập điểm đánh giá", Toast.LENGTH_SHORT).show();
                 else {
-                    phimDao.UpdateDiemPhim(Double.parseDouble(txtDanhGia.getText().toString()), phim.getMaPhim());
-                    Toast.makeText(DetailPhim.this, "Thành công", Toast.LENGTH_SHORT).show();
+                    if (Double.parseDouble(txtDanhGia.getText().toString()) > 0 && Double.parseDouble(txtDanhGia.getText().toString()) <= 10)
+                    {
+                        phimDao.UpdateDiemPhim(Double.parseDouble(txtDanhGia.getText().toString()), phim.getMaPhim());
+                        Toast.makeText(DetailPhim.this, "Thành công", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                        Toast.makeText(DetailPhim.this, "Vui lòng nhập điểm đánh giá từ 0-10 !!!", Toast.LENGTH_SHORT).show();
                 }
 
             }
