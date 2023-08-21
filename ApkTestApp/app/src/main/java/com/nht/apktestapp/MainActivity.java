@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements OnDialogDismissLi
                     p.setMoTa(c.getString(2));
                     p.setImgPhim(c.getBlob(3));
                     p.setGiaPhim(c.getDouble(4));
+                    p.setDiemPhim(c.getDouble(5));
                     list.add(p);
                     c.moveToNext();
                 }
