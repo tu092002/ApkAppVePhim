@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,16 +88,19 @@ public class DetailPhim extends AppCompatActivity {
                 if (dangNhap.currentUser == null) {
                     Toast.makeText(DetailPhim.this, "Bạn cần đăng nhập trước khi đặt vé!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(DetailPhim.this, dangNhap.class));
-                } else if (txtDanhGia == null)
-                    Toast.makeText(DetailPhim.this, "Vui lòng nhập điểm đánh giá", Toast.LENGTH_SHORT).show();
-                else {
-                    if (Double.parseDouble(txtDanhGia.getText().toString()) > 0 && Double.parseDouble(txtDanhGia.getText().toString()) <= 10)
-                    {
-                        phimDao.UpdateDiemPhim(Double.parseDouble(txtDanhGia.getText().toString()), phim.getMaPhim());
-                        Toast.makeText(DetailPhim.this, "Thành công", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (TextUtils.isEmpty(txtDanhGia.getText().toString()))
+                        Toast.makeText(DetailPhim.this, "Vui lòng nhập điểm đánh giá", Toast.LENGTH_SHORT).show();
+                    else {
+                        if (Double.parseDouble(txtDanhGia.getText().toString()) > 0 && Double.parseDouble(txtDanhGia.getText().toString()) <= 10)
+                        {
+                            phimDao.UpdateDiemPhim(Double.parseDouble(txtDanhGia.getText().toString()), phim.getMaPhim());
+                            Toast.makeText(DetailPhim.this, "Thành công", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                            Toast.makeText(DetailPhim.this, "Vui lòng nhập điểm đánh giá từ 0-10 !!!", Toast.LENGTH_SHORT).show();
                     }
-                    else
-                        Toast.makeText(DetailPhim.this, "Vui lòng nhập điểm đánh giá từ 0-10 !!!", Toast.LENGTH_SHORT).show();
+
                 }
 
             }
